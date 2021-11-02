@@ -24,8 +24,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	private static final String BTNSIMULAR = "./img/BtnSimular.png";
 	private static final String BTNATRAS = "./img/BtnAtras.png";
 	private static final String LOGOESQUINA = "./img/LogoEsquina.png";
-	//private static final String PERGAMINO = "./img/Pergamino.png";
-	private static final String PERGAMINO = "./img/PergaminoTexto.png";
+	private static final String PERGAMINO = "./img/Pergamino.png";
 	private static final String LATERALDERECHO = "./img/LateralDerecho.png";
 	private static final String LATERALIZQUIERDO = "./img/LateralIzquierdo.png";
 	
@@ -73,13 +72,13 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		lblPergamino.setBounds(158, 6, 280, 350);
 		contentPane.add(lblPergamino);
 		
-		JLabel lblLateralDerecho = new JLabel(new ImageIcon(LATERALDERECHO));
-		lblLateralDerecho.setBounds(40, 98, 50, 210);
-		contentPane.add(lblLateralDerecho);
-		
 		JLabel lblLateralIzquierdo = new JLabel(new ImageIcon(LATERALIZQUIERDO));
-		lblLateralIzquierdo.setBounds(514, 93, 50, 210);
+		lblLateralIzquierdo.setBounds(40, 98, 50, 210);
 		contentPane.add(lblLateralIzquierdo);
+		
+		JLabel lblLateralDerecho = new JLabel(new ImageIcon(LATERALDERECHO));
+		lblLateralDerecho.setBounds(514, 93, 50, 210);
+		contentPane.add(lblLateralDerecho);
 		
 		JLabel lblFondo = new JLabel(new ImageIcon(FONDO));
 		lblFondo.setBounds(0, 6, 604, 361);

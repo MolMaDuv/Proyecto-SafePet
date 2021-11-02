@@ -55,9 +55,13 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblLogoEsquina = new JLabel(new ImageIcon(LOGOESQUINA));
-		lblLogoEsquina.setBounds(25, 11, 80, 80);
-		contentPane.add(lblLogoEsquina);
+		JLabel lblLogoEsquina1 = new JLabel(new ImageIcon(LOGOESQUINA));
+		lblLogoEsquina1.setBounds(25, 11, 80, 80);
+		contentPane.add(lblLogoEsquina1);
+		
+		JLabel lblLogoEsquina2 = new JLabel(new ImageIcon(LOGOESQUINA));
+		lblLogoEsquina2.setBounds(495, 11, 80, 80);
+		contentPane.add(lblLogoEsquina2);
 		
 		btnIngresar = new JButton(new ImageIcon(BTNINGRESAR));
 		btnIngresar.setBounds(253, 263, 110, 30);
@@ -101,13 +105,13 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		JTextContraseña.setBounds(309, 216, 86, 20);
 		contentPane.add(JTextContraseña);
 		
-		JLabel lblLateralDerecho = new JLabel(new ImageIcon(LATERALDERECHO));
-		lblLateralDerecho.setBounds(40, 98, 50, 210);
-		contentPane.add(lblLateralDerecho);
-		
 		JLabel lblLateralIzquierdo = new JLabel(new ImageIcon(LATERALIZQUIERDO));
-		lblLateralIzquierdo.setBounds(514, 31, 50, 272);
+		lblLateralIzquierdo.setBounds(40, 98, 50, 210);
 		contentPane.add(lblLateralIzquierdo);
+		
+		JLabel lblLateralDerecho = new JLabel(new ImageIcon(LATERALDERECHO));
+		lblLateralDerecho.setBounds(515, 98, 50, 210);
+		contentPane.add(lblLateralDerecho);
 		
 		JLabel lblFondo = new JLabel(new ImageIcon(FONDO));
 		lblFondo.setBounds(0, 0, 604, 361);
