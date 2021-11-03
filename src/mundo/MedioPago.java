@@ -1,0 +1,10 @@
+package mundo;
+
+public enum MedioPago {
+	CUENTA_CORRIENTE,
+	CUENTA_AHORROS,
+	TARJETA_CREDITO,
+	TARJETA_DEBITO,
+	PAGO_DIRECTO;
+
+}
