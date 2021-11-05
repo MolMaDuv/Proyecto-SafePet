@@ -43,7 +43,6 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		
 		btnIngresar = new JButton(new ImageIcon(BTNINGRESAR));
 		btnIngresar.setBounds(249, 285, 110, 30);
-		btnIngresar.setBorder(null);
 		btnIngresar.addActionListener(this);
 		contentPane.add(btnIngresar);
 		

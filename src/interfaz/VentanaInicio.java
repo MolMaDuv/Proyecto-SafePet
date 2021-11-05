@@ -48,19 +48,16 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		
 		btnIngresar = new JButton(new ImageIcon(BTNINGRESAR));
 		btnIngresar.setBounds(484, 32, 110, 30);
-		btnIngresar.setBorder(null);
 		btnIngresar.addActionListener(this);
 		contentPane.add(btnIngresar);
 		
 		btnSimular = new JButton(new ImageIcon(BTNSIMULAR));
 		btnSimular.setBounds(484, 320, 110, 30);
-		btnSimular.setBorder(null);
 		btnSimular.addActionListener(this);
 		contentPane.add(btnSimular);
 		
 		btnAtras = new JButton(new ImageIcon(BTNATRAS));
 		btnAtras.setBounds(10, 320, 110, 30);
-		btnAtras.setBorder(null);
 		btnAtras.addActionListener(this);
 		contentPane.add(btnAtras);
 		
@@ -81,7 +78,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		contentPane.add(lblLateralDerecho);
 		
 		JLabel lblFondo = new JLabel(new ImageIcon(FONDO));
-		lblFondo.setBounds(0, 6, 604, 361);
+		lblFondo.setBounds(0, 0, 604, 361);
 		contentPane.add(lblFondo);
 		
 
