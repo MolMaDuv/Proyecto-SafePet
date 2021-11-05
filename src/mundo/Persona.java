@@ -8,34 +8,8 @@ public class Persona {
 	private String direccion;
 	private String correo;
 	private int edad;
-	private String nombreUsuario;
-	private String contrasenia;
 	
 	
-	/**
-	 * @return the nombreUsuario
-	 */
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
-	/**
-	 * @param nombreUsuario the nombreUsuario to set
-	 */
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
-	/**
-	 * @return the contrasenia
-	 */
-	public String getContrasenia() {
-		return contrasenia;
-	}
-	/**
-	 * @param contrasenia the contrasenia to set
-	 */
-	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
-	}
 	/**
 	 * @return the id
 	 */
@@ -108,8 +82,7 @@ public class Persona {
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
-	public Persona(int id, String nombre, String telefono, String direccion, String correo, int edad,
-			String nombreUsuario, String contrasenia) {
+	public Persona(int id, String nombre, String telefono, String direccion, String correo, int edad) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -117,16 +90,16 @@ public class Persona {
 		this.direccion = direccion;
 		this.correo = correo;
 		this.edad = edad;
-		this.nombreUsuario = nombreUsuario;
-		this.contrasenia = contrasenia;
+
 	}
 	@Override
 	public String toString() {
 		return "Persona [id=" + id + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion
-				+ ", correo=" + correo + ", edad=" + edad + ", nombreUsuario=" + nombreUsuario + ", contrasenia="
-				+ contrasenia + "]";
+				+ ", correo=" + correo + ", edad=" + edad + " ]";
 	}
 
+	
+	
 	
 	
 	

@@ -19,8 +19,8 @@ public class Simulacion extends Persona{
 	}
 
 	public Simulacion(int id, String nombre, String telefono, String direccion, String correo, int edad,
-			String nombreUsuario, String contrasenia, int numeroMascotas) {
-		super(id, nombre, telefono, direccion, correo, edad, nombreUsuario, contrasenia);
+			int numeroMascotas) {
+		super(id, nombre, telefono, direccion, correo, edad);
 		this.numeroMascotas = numeroMascotas;
 	}
 

@@ -39,12 +39,11 @@ public class Empleado extends Persona {
 
 
 	public Empleado(int id, String nombre, String telefono, String direccion, String correo, int edad,
-			String nombreUsuario, String contrasenia, int numeroContrato, double salario) {
-		super(id, nombre, telefono, direccion, correo, edad, nombreUsuario, contrasenia);
+			int numeroContrato, double salario) {
+		super(id, nombre, telefono, direccion, correo, edad);
 		this.numeroContrato = numeroContrato;
 		this.salario = salario;
 	}
-
 
 	@Override
 	public String toString() {
