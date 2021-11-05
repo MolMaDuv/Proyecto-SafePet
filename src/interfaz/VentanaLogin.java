@@ -3,6 +3,7 @@ package interfaz;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,13 +13,17 @@ import javax.swing.border.EmptyBorder;
 import mundo.SafePet;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import java.awt.Color;
+import javax.swing.JList;
 
 public class VentanaLogin extends JFrame implements ActionListener {
 
 	private VentanaInicio miVentanaInicio;
+	
 	private SafePet miSafePet;
+	
 	
 	private JPanel contentPane;
 	private static final String LOGOESQUINA = "./img/LogoEsquina.png";
@@ -29,6 +34,8 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private static final String LOGIN = "./img/Login.png";
 	private static final String LATERALDERECHO = "./img/LateralDerecho.png";
 	private static final String LATERALIZQUIERDO = "./img/LateralIzquierdo.png";
+	
+	private JComboBox comboBoxRol;
 	
 	private JButton btnIngresar;
 	private JButton btnRegistrar;
@@ -43,7 +50,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	 */
 	public VentanaLogin(VentanaInicio miVentanaInicio, SafePet miSafePet) {
 		
-		setTitle("Unishop UQ");
+		setTitle("SafePet UQ");
 		
 		this.miVentanaInicio = miVentanaInicio;
 		this.miSafePet = miSafePet;
@@ -85,25 +92,26 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		lblIcono.setBounds(249, 31, 130, 130);
 		contentPane.add(lblIcono);
 		
-		JLabel lblUsuario = new JLabel("Usuario");
+		JLabel lblUsuario = new JLabel("Rol");
 		lblUsuario.setForeground(Color.WHITE);
-		lblUsuario.setBounds(229, 185, 70, 20);
+		lblUsuario.setBounds(230, 184, 30, 20);
 		contentPane.add(lblUsuario);
 		
-		JTextField JTextUsuario = new JTextField();
-		JTextUsuario.setBounds(309, 185, 86, 20);
-		contentPane.add(JTextUsuario);
-		JTextUsuario.setColumns(10);
+		comboBoxRol = new JComboBox();
+		comboBoxRol.setModel(new DefaultComboBoxModel(new String[] {"", "Funcionario", "Afiliado"}));
+		comboBoxRol.setBounds(270, 184, 110, 20);
+		contentPane.add(comboBoxRol);
 		
-		JLabel lblContraseña = new JLabel("Contrase\u00F1a");
+		JLabel lblContraseña = new JLabel("Id");
 		lblContraseña.setForeground(Color.WHITE);
-		lblContraseña.setBounds(229, 216, 70, 20);
+		lblContraseña.setBounds(230, 215, 30, 20);
 		contentPane.add(lblContraseña);
 		
 		JTextField JTextContraseña = new JTextField();
 		JTextContraseña.setColumns(10);
-		JTextContraseña.setBounds(309, 216, 86, 20);
+		JTextContraseña.setBounds(270, 215, 110, 20);
 		contentPane.add(JTextContraseña);
+		
 		
 		JLabel lblLateralIzquierdo = new JLabel(new ImageIcon(LATERALIZQUIERDO));
 		lblLateralIzquierdo.setBounds(40, 98, 50, 210);
@@ -116,13 +124,16 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		JLabel lblFondo = new JLabel(new ImageIcon(FONDO));
 		lblFondo.setBounds(0, 0, 604, 361);
 		contentPane.add(lblFondo);	
+		
+		
 				
 	}
 	
 	
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource() == btnIngresar) {	
+		if(e.getSource() == btnIngresar) 
+		{	
 			
 			
 		}
@@ -131,6 +142,14 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			
 			miVentanaInicio.setVisible(true);
 			miVentanaInicio.setLocationRelativeTo(null);
+			setVisible(false);
+		}
+		
+	if(e.getSource() == btnRegistrar) {	
+			
+			VentanaRegistrar miVentanaRegistrar = new VentanaRegistrar(this,miSafePet);
+			miVentanaRegistrar.setVisible(true);
+			miVentanaRegistrar.setLocationRelativeTo(null);
 			setVisible(false);
 		}
 

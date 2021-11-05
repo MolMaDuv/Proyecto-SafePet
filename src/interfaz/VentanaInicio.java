@@ -37,7 +37,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		this.miVentanaPrincipal = miVentanaPrincipal;
 		this.miSafePet = miSafePet;
 		
-		setTitle("Unishop UQ");
+		setTitle("SafePet UQ");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 620, 400);

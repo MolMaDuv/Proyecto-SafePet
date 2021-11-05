@@ -27,13 +27,21 @@ public class VentanaRegistrar extends JFrame implements ActionListener {
 	private JTextField capturaEdad;
 	private JButton agregar;
 	private SafePet miSafePet;
+	private VentanaLogin miVentanaLogin;
+	
 
 
 
 	/**
 	 * Create the frame.
+	 * @param miSafePet2 
+	 * @param ventanaLogin 
 	 */
-	public VentanaRegistrar()  {
+	public VentanaRegistrar( VentanaLogin miVentanaLogin, SafePet miSafePet)  {
+	
+		setTitle("SafePet UQ");
+		this.miVentanaLogin = miVentanaLogin;
+		this.miSafePet = miSafePet;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 620, 400);
 		contentPane = new JPanel();
