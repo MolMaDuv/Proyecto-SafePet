@@ -96,6 +96,14 @@ public class VentanaInicio extends JFrame implements ActionListener {
 			setVisible(false);
 		}
 		
+		if(e.getSource() == btnSimular) {	
+			
+			VentanaSimulacion miVentanaSimulacion = new VentanaSimulacion(this, miSafePet);
+			miVentanaSimulacion.setVisible(true);
+			miVentanaSimulacion.setLocationRelativeTo(null);
+			setVisible(false);
+		}
+		
 		if(e.getSource() == btnAtras) {	
 			
 			miVentanaPrincipal.setVisible(true);

@@ -177,7 +177,7 @@ public class VentanaRegistrar extends JFrame implements ActionListener {
 					|| JTextDireccion.getText().equals("") || JTextCorreo.getText().equals("")
 					|| JTextEdad.getText().equals("")) {
 
-				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos", "Datos incompletos",
+				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados", "Datos incompletos",
 						JOptionPane.WARNING_MESSAGE);
 
 			} else {
@@ -195,6 +195,7 @@ public class VentanaRegistrar extends JFrame implements ActionListener {
 
 					Afiliado miAfiliado = new Afiliado(id, nombre, telefono, direccion, correo, edad, 0, null);
 					miSafePet.agregarUsuario(miAfiliado);
+					JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 
@@ -205,7 +206,6 @@ public class VentanaRegistrar extends JFrame implements ActionListener {
 			miVentanaLogin.setVisible(true);
 			miVentanaLogin.setLocationRelativeTo(null);
 			setVisible(false);
-
 		}
 	}
 }

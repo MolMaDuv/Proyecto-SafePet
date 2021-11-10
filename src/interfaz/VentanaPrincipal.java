@@ -30,6 +30,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		
 		setTitle("SafePet UQ");
 		
+		miSafePet = new SafePet();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 620, 400);
 		contentPane = new JPanel();
