@@ -5,12 +5,12 @@ import java.util.Date;
 public class Beneficiario {
 	
 	private int codigoMascota;
-	private Date fechaNacimiento;
+	private int edad;
 	private String nombre;
 	private String raza;
 	private double peso;
 	private int altura;
-	private String descripcion;
+	private String color;
 	/**
 	 * @return the codigoMascota
 	 */
@@ -24,16 +24,16 @@ public class Beneficiario {
 		this.codigoMascota = codigoMascota;
 	}
 	/**
-	 * @return the fechaNacimiento
+	 * @return the edad
 	 */
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
+	public int getEdad() {
+		return edad;
 	}
 	/**
-	 * @param fechaNacimiento the fechaNacimiento to set
+	 * @param edad the edad to set
 	 */
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
+	public void setEdad(int edad) {
+		this.edad = edad;
 	}
 	/**
 	 * @return the nombre
@@ -86,30 +86,30 @@ public class Beneficiario {
 	/**
 	 * @return the descripcion
 	 */
-	public String getDescripcion() {
-		return descripcion;
+	public String getColor() {
+		return color;
 	}
 	/**
 	 * @param descripcion the descripcion to set
 	 */
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setColor(String color) {
+		this.color = color;
 	}
-	public Beneficiario(int codigoMascota, Date fechaNacimiento, String nombre, String raza, double peso, int altura,
-			String descripcion) {
+	public Beneficiario(int codigoMascota, int edad, String nombre, String raza, double peso, int altura,
+			String color) {
 		super();
 		this.codigoMascota = codigoMascota;
-		this.fechaNacimiento = fechaNacimiento;
+		this.edad = edad;
 		this.nombre = nombre;
 		this.raza = raza;
 		this.peso = peso;
 		this.altura = altura;
-		this.descripcion = descripcion;
+		this.color = color;
 	}
 	@Override
 	public String toString() {
-		return "Beneficiario [codigoMascota=" + codigoMascota + ", fechaNacimiento=" + fechaNacimiento + ", nombre="
-				+ nombre + ", raza=" + raza + ", peso=" + peso + ", altura=" + altura + ", descripcion=" + descripcion
+		return "Beneficiario [codigoMascota = " + codigoMascota + ", Edad = " + edad + ", nombre = "
+				+ nombre + ", raza = " + raza + ", peso = " + peso + ", altura = " + altura + ", color = " + color
 				+ "]";
 	}
 	

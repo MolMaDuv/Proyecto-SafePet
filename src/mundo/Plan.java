@@ -1,76 +1,92 @@
 package mundo;
 
+import java.util.ArrayList;
+
 public class Plan {
 	private int codigo;
-	private String detalle;
+	private boolean consultas;
+	private boolean ambulancia;
+	private boolean asistenciaCasa;
 	private double valor;
-	private int numeroAfiliados;
+	private double copago;
+	private Afiliado miAfiliado;
+	private ArrayList<Beneficiario> misBeneficiarios;
 	
-	
-	/**
-	 * @return the numeroAfiliados
-	 */
-	public int getNumeroAfiliados() {
-		return numeroAfiliados;
+	public Plan(int codigo, boolean consultas, boolean ambulancia, boolean asistenciaCasa, double valor, double copago,
+			Afiliado miAfiliado, ArrayList<Beneficiario> misBeneficiarios) {
+		super();
+		this.codigo = codigo;
+		this.consultas = consultas;
+		this.ambulancia = ambulancia;
+		this.asistenciaCasa = asistenciaCasa;
+		this.valor = valor;
+		this.copago = copago;
+		this.miAfiliado = miAfiliado;
+		this.misBeneficiarios = misBeneficiarios;
 	}
-	/**
-	 * @param numeroAfiliados the numeroAfiliados to set
-	 */
-	public void setNumeroAfiliados(int numeroAfiliados) {
-		this.numeroAfiliados = numeroAfiliados;
-	}
-	/**
-	 * @return the codigo
-	 */
+
 	public int getCodigo() {
 		return codigo;
 	}
-	/**
-	 * @param codigo the codigo to set
-	 */
+
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-	/**
-	 * @return the detalle
-	 */
-	public String getDetalle() {
-		return detalle;
+
+	public boolean isConsultas() {
+		return consultas;
 	}
-	/**
-	 * @param detalle the detalle to set
-	 */
-	public void setDetalle(String detalle) {
-		this.detalle = detalle;
+
+	public void setConsultas(boolean consultas) {
+		this.consultas = consultas;
 	}
-	/**
-	 * @return the valor
-	 */
+
+	public boolean isAmbulancia() {
+		return ambulancia;
+	}
+
+	public void setAmbulancia(boolean ambulancia) {
+		this.ambulancia = ambulancia;
+	}
+
+	public boolean isAsistenciaCasa() {
+		return asistenciaCasa;
+	}
+
+	public void setAsistenciaCasa(boolean asistenciaCasa) {
+		this.asistenciaCasa = asistenciaCasa;
+	}
+
 	public double getValor() {
 		return valor;
 	}
-	/**
-	 * @param valor the valor to set
-	 */
+
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	public Plan(int codigo, String detalle, double valor, int numeroAfiliados) {
-		super();
-		this.codigo = codigo;
-		this.detalle = detalle;
-		this.valor = valor;
-		this.numeroAfiliados = numeroAfiliados;
-	}
-	
-	@Override
-	public String toString() {
-		return "Plan [codigo=" + codigo + ", detalle=" + detalle + ", valor=" + valor + ", numeroAfiliados="
-				+ numeroAfiliados + "]";
-	}
-	
-	
-	
-	
 
+	public double getCopago() {
+		return copago;
+	}
+
+	public void setCopago(double copago) {
+		this.copago = copago;
+	}
+
+	public Afiliado getMiAfiliado() {
+		return miAfiliado;
+	}
+
+	public void setMiAfiliado(Afiliado miAfiliado) {
+		this.miAfiliado = miAfiliado;
+	}
+
+	public ArrayList<Beneficiario> getMisBeneficiarios() {
+		return misBeneficiarios;
+	}
+
+	public void setMisBeneficiarios(ArrayList<Beneficiario> misBeneficiarios) {
+		this.misBeneficiarios = misBeneficiarios;
+	}
+	
 }

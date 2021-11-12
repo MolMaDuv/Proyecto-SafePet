@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -22,29 +23,31 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import mundo.Afiliado;
+import mundo.Beneficiario;
+import mundo.Empleado;
+import mundo.Plan;
 import mundo.SafePet;
 
-public class VentanaSimulacion extends JFrame implements ActionListener {
+public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 
-	private VentanaInicio miVentanaInicio;
+	private VentanaFuncionario miVentanaFuncionario;
 	private SafePet miSafePet;
-
-	private JTextField JTextId;
-	private JTextField JTextNombre;
-	private JTextField JTextTelefono;
-	private JTextField JTextCorreo;
+	private Afiliado miAfiliado;
+	private Empleado miEmpleado;
+	private ArrayList<Beneficiario> misBeneficiarios;
 
 	private JPanel contentPane;
 	private static final String FONDO = "./img/fondoGrande.png";
 	private static final String BTNATRAS = "./img/BtnAtras.png";
-	private static final String BTNSIMULAR = "./img/BtnSimular.png";
+	private static final String BTNAGREGAR = "./img/BtnAgregar.png";
 	private static final String LOGOESQUINA = "./img/LogoEsquina.png";
 	private static final String LATERALDERECHO = "./img/LateralDerechoGrande.png";
 	private static final String LATERALIZQUIERDO = "./img/LateralIzquierdoGrande.png";
 
 	private JButton btnAtras;
 	private JButton btnAgregar;
-	private JButton btnSimular;
+	private JButton btnRegistrar;
 
 	private JCheckBox jcbConsultasIlimitadas;
 	private JCheckBox jcbAmbulancia;
@@ -58,7 +61,7 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 	private JTextField JTextNombreMascota;
 	private JTextField JTextRaza;
 	private JTextField JTextPeso;
-	private JTextField JTextColor;
+	private JTextField JTextAltura;
 
 	JScrollPane panelTabla = new JScrollPane();
 	DefaultTableModel modelo;
@@ -71,17 +74,22 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 	boolean tres = false;
 	boolean seis = false;
 	boolean doce = false;
+	private JTextField JTextEdad;
+	private JTextField JTextColor;
 
 	/**
 	 * Create the frame.
 	 * 
 	 * @param miSafePet
+	 * @param miAfiliado 
 	 * @param miVentanaInicio
 	 */
-	public VentanaSimulacion(VentanaInicio miVentanaInicio, SafePet miSafePet) {
+	public VentanaConfeccionarPlan(VentanaFuncionario miVentanaFuncionario, SafePet miSafePet, Afiliado miAfiliado, Empleado miEmpleado) {
 
-		this.miVentanaInicio = miVentanaInicio;
+		this.miVentanaFuncionario = miVentanaFuncionario;
 		this.miSafePet = miSafePet;
+		this.miAfiliado = miAfiliado;
+		this.miEmpleado = miEmpleado;
 
 		setTitle("SafePet UQ");
 
@@ -96,61 +104,30 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setBounds(10, 26, 584, 20);
+		lblTitulo.setBounds(10, 78, 584, 20);
 		contentPane.add(lblTitulo);
 
-		JLabel lblTextoSuperior = new JLabel("PARA REALIZAR LA SIMULACION");
+		JLabel lblTextoSuperior = new JLabel("PARA CONFECCIONAR EL PLAN");
 		lblTextoSuperior.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTextoSuperior.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTextoSuperior.setForeground(Color.WHITE);
-		lblTextoSuperior.setBounds(10, 46, 584, 20);
+		lblTextoSuperior.setBounds(10, 98, 584, 20);
 		contentPane.add(lblTextoSuperior);
-
-		JLabel lblDatosUsuario = new JLabel("DATOS USUARIO");
-		lblDatosUsuario.setForeground(Color.WHITE);
-		lblDatosUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDatosUsuario.setBounds(66, 77, 450, 20);
-		contentPane.add(lblDatosUsuario);
-
-		JLabel lblId = new JLabel("Id");
+		
+		JLabel lblFuncionario = new JLabel("Funcionario " + miEmpleado.getNombre() + " - " + miEmpleado.getId());
+		lblFuncionario.setForeground(Color.WHITE);
+		lblFuncionario.setBounds(128, 11, 275, 20);
+		contentPane.add(lblFuncionario);
+		
+		JLabel lblAfiliado = new JLabel("Afiliado "+miAfiliado.getNombre());
+		lblAfiliado.setForeground(Color.WHITE);
+		lblAfiliado.setBounds(128, 47, 170, 20);
+		contentPane.add(lblAfiliado);
+		
+		JLabel lblId = new JLabel("Id "+miAfiliado.getId());
 		lblId.setForeground(Color.WHITE);
-		lblId.setBounds(128, 108, 60, 20);
+		lblId.setBounds(308, 47, 110, 20);
 		contentPane.add(lblId);
-
-		JTextId = new JTextField();
-		JTextId.setBounds(198, 108, 86, 20);
-		contentPane.add(JTextId);
-		JTextId.setColumns(10);
-
-		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setForeground(Color.WHITE);
-		lblNombre.setBounds(294, 108, 60, 20);
-		contentPane.add(lblNombre);
-
-		JTextNombre = new JTextField();
-		JTextNombre.setBounds(364, 108, 86, 20);
-		contentPane.add(JTextNombre);
-		JTextNombre.setColumns(10);
-
-		JLabel lblTelefono = new JLabel("Telefono");
-		lblTelefono.setForeground(Color.WHITE);
-		lblTelefono.setBounds(294, 139, 60, 20);
-		contentPane.add(lblTelefono);
-
-		JTextTelefono = new JTextField();
-		JTextTelefono.setBounds(364, 139, 86, 20);
-		contentPane.add(JTextTelefono);
-		JTextTelefono.setColumns(10);
-
-		JLabel lblCorreo = new JLabel("Correo");
-		lblCorreo.setForeground(Color.WHITE);
-		lblCorreo.setBounds(128, 139, 60, 20);
-		contentPane.add(lblCorreo);
-
-		JTextCorreo = new JTextField();
-		JTextCorreo.setBounds(198, 139, 86, 20);
-		contentPane.add(JTextCorreo);
-		JTextCorreo.setColumns(10);
 
 		JLabel lblLogoEsquina1 = new JLabel(new ImageIcon(LOGOESQUINA));
 		lblLogoEsquina1.setBounds(25, 11, 80, 80);
@@ -173,59 +150,79 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 		btnAtras.addActionListener(this);
 		contentPane.add(btnAtras);
 
-		btnSimular = new JButton(new ImageIcon(BTNSIMULAR));
-		btnSimular.setBounds(484, 520, 110, 30);
-		btnSimular.addActionListener(this);
-		contentPane.add(btnSimular);
+		btnRegistrar = new JButton(new ImageIcon(BTNAGREGAR));
+		btnRegistrar.setBounds(484, 520, 110, 30);
+		btnRegistrar.addActionListener(this);
+		contentPane.add(btnRegistrar);
 
 		JLabel lblDatosMascota = new JLabel("DATOS MASCOTA(S)");
 		lblDatosMascota.setForeground(Color.WHITE);
 		lblDatosMascota.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDatosMascota.setBounds(66, 182, 450, 20);
+		lblDatosMascota.setBounds(69, 129, 450, 20);
 		contentPane.add(lblDatosMascota);
 
 		JLabel lblNombreMascota = new JLabel("Nombre");
 		lblNombreMascota.setForeground(Color.WHITE);
-		lblNombreMascota.setBounds(128, 213, 60, 20);
+		lblNombreMascota.setBounds(131, 160, 60, 20);
 		contentPane.add(lblNombreMascota);
 
 		JTextNombreMascota = new JTextField();
-		JTextNombreMascota.setBounds(198, 213, 86, 20);
+		JTextNombreMascota.setBounds(201, 160, 86, 20);
 		contentPane.add(JTextNombreMascota);
 		JTextNombreMascota.setColumns(10);
 
 		JLabel lblRazaMascota = new JLabel("Raza");
 		lblRazaMascota.setForeground(Color.WHITE);
-		lblRazaMascota.setBounds(294, 213, 60, 20);
+		lblRazaMascota.setBounds(297, 160, 60, 20);
 		contentPane.add(lblRazaMascota);
 
 		JTextRaza = new JTextField();
-		JTextRaza.setBounds(364, 213, 86, 20);
+		JTextRaza.setBounds(367, 160, 86, 20);
 		contentPane.add(JTextRaza);
 		JTextRaza.setColumns(10);
 
 		JLabel lblPesoMascota = new JLabel("Peso");
 		lblPesoMascota.setForeground(Color.WHITE);
-		lblPesoMascota.setBounds(128, 244, 60, 20);
+		lblPesoMascota.setBounds(131, 191, 60, 20);
 		contentPane.add(lblPesoMascota);
 
 		JTextPeso = new JTextField();
-		JTextPeso.setBounds(198, 244, 86, 20);
+		JTextPeso.setBounds(201, 191, 86, 20);
 		contentPane.add(JTextPeso);
 		JTextPeso.setColumns(10);
 
-		JLabel lblColorMascota = new JLabel("Color");
-		lblColorMascota.setForeground(Color.WHITE);
-		lblColorMascota.setBounds(294, 244, 60, 20);
-		contentPane.add(lblColorMascota);
+		JLabel lblAlturaMascota = new JLabel("Altura");
+		lblAlturaMascota.setForeground(Color.WHITE);
+		lblAlturaMascota.setBounds(297, 191, 60, 20);
+		contentPane.add(lblAlturaMascota);
 
+		JTextAltura = new JTextField();
+		JTextAltura.setBounds(367, 191, 86, 20);
+		contentPane.add(JTextAltura);
+		JTextAltura.setColumns(10);
+		
+		JLabel lblEdad = new JLabel("Edad");
+		lblEdad.setForeground(Color.WHITE);
+		lblEdad.setBounds(128, 222, 65, 20);
+		contentPane.add(lblEdad);
+		
+		JTextEdad = new JTextField();
+		JTextEdad.setBounds(201, 222, 86, 20);
+		contentPane.add(JTextEdad);
+		JTextEdad.setColumns(10);
+		
+		JLabel lblColor = new JLabel("Color");
+		lblColor.setForeground(Color.WHITE);
+		lblColor.setBounds(297, 222, 60, 20);
+		contentPane.add(lblColor);
+		
 		JTextColor = new JTextField();
-		JTextColor.setBounds(364, 244, 86, 20);
+		JTextColor.setBounds(367, 222, 86, 20);
 		contentPane.add(JTextColor);
 		JTextColor.setColumns(10);
 
-		btnAgregar = new JButton("Agregar");
-		btnAgregar.setBounds(252, 275, 89, 23);
+		btnAgregar = new JButton(new ImageIcon(BTNAGREGAR));
+		btnAgregar.setBounds(257, 264, 110, 30);
 		btnAgregar.addActionListener(this);
 		contentPane.add(btnAgregar);
 
@@ -234,6 +231,8 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 		modelo.addColumn("Nombre");
 		modelo.addColumn("Raza");
 		modelo.addColumn("Peso");
+		modelo.addColumn("Altura");
+		modelo.addColumn("Edad");
 		modelo.addColumn("Color");
 
 		tabla = new JTable(modelo);
@@ -242,7 +241,7 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 
 		panelTabla = new JScrollPane(tabla, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		panelTabla.setBounds(128, 316, 340, 80);
+		panelTabla.setBounds(100, 316, 405, 80);
 		contentPane.add(panelTabla);
 
 		JLabel lblServicios = new JLabel("SERVICIOS");
@@ -304,7 +303,7 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 		grupoTiempo.add(jrbTresMeses);
 		grupoTiempo.add(jrbSeisMeses);
 		grupoTiempo.add(jrbDoceMeses);
-
+		
 		JLabel lblFondo = new JLabel(new ImageIcon(FONDO));
 		lblFondo.setBounds(0, 0, 604, 561);
 		contentPane.add(lblFondo);
@@ -314,8 +313,8 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 
 		if (e.getSource() == btnAtras) {
 
-			miVentanaInicio.setVisible(true);
-			miVentanaInicio.setLocationRelativeTo(null);
+			miVentanaFuncionario.setVisible(true);
+			miVentanaFuncionario.setLocationRelativeTo(null);
 			setVisible(false);
 		}
 
@@ -324,22 +323,30 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 			String nombre = JTextNombreMascota.getText();
 			String raza = JTextRaza.getText();
 			String peso = JTextPeso.getText();
+			String altura = JTextAltura.getText();
+			String edad = JTextEdad.getText();
 			String color = JTextColor.getText();
-
-			String beneficiario[] = { nombre, raza, peso, color };
-			modelo.addRow(beneficiario);
-
-			contadorMascotas++;
-			limpiarInterfaz();
+			
+			if(nombre == "" || raza == "" || peso == "" || altura == "" || edad == "" || color == "") {
+				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados", "Datos mascota incompletos",
+						JOptionPane.WARNING_MESSAGE);
+			} else {
+				String beneficiario[] = { nombre, raza, peso, altura, edad, color };
+				modelo.addRow(beneficiario);
+				
+				Beneficiario miBeneficiario = new Beneficiario(miAfiliado.getId(), Integer.parseInt(edad), nombre, raza, Double.parseDouble(peso), Integer.parseInt(altura), color);
+				misBeneficiarios.add(miBeneficiario);
+				
+				contadorMascotas++;
+				limpiarInterfaz();
+			}
 		}
 
-		if (e.getSource() == btnSimular) {
+		if (e.getSource() == btnRegistrar) {
 
-			if (JTextId.getText() == "" || JTextNombre.getText() == "" || JTextCorreo.getText() == ""
-					|| JTextTelefono.getText() == "" || jcbConsultasIlimitadas.isSelected() == false
-					|| (jcbConsultasIlimitadas.isSelected() == false && jcbAmbulancia.isSelected() == false && 
-						jcbAsistenciaCasa.isSelected() == false) || (jrbTresMeses.isSelected() == false && 
-						jrbSeisMeses.isSelected() == false && jrbDoceMeses.isSelected() == false)) {
+			if ((jcbConsultasIlimitadas.isSelected() == false && jcbAmbulancia.isSelected() == false && 
+					jcbAsistenciaCasa.isSelected() == false) || (jrbTresMeses.isSelected() == false && 
+					jrbSeisMeses.isSelected() == false && jrbDoceMeses.isSelected() == false)) {
 
 				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados", "Campos vacios",
 						JOptionPane.WARNING_MESSAGE);
@@ -370,10 +377,36 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 
 				String respuestaSimulacion = miSafePet.calcularPlanSimulacion(contadorMascotas, consultas, ambulancia,
 						asistencia, tres, seis, doce);
+				
+				int i = JOptionPane.showConfirmDialog(this, respuestaSimulacion + "\n\n¿Desea continuar con el plan?");
+					
+				if (i == 0) {
+					
+					double valor = miSafePet.valorPlan(contadorMascotas, consultas, ambulancia, asistencia, tres, seis, doce);
+					
+					double copago = miSafePet.calcularCopago(valor);
+					
+					Plan miPlan = new Plan(0, consultas, ambulancia, asistencia, valor, copago, miAfiliado, misBeneficiarios);
+					miSafePet.agregarPlan(miPlan);
+					
+					JOptionPane.showMessageDialog(null, "Plan creado exitosamente", "Plan creado",
+							JOptionPane.WARNING_MESSAGE);
+					
+					miVentanaFuncionario.setVisible(true);
+					miVentanaFuncionario.setLocationRelativeTo(null);
+					setVisible(false);
+				}
+				
+				if (i == 1) {
 
-				String nombre = JTextNombre.getText();
-				JOptionPane.showMessageDialog(null, "Sr(a) " + nombre + "\n\n" + respuestaSimulacion,
-						"Simulacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Se procedera a cancelar la creacion del plan", "Plan cancelado",
+							JOptionPane.WARNING_MESSAGE);
+
+					miVentanaFuncionario.setVisible(true);
+					miVentanaFuncionario.setLocationRelativeTo(null);
+					setVisible(false);
+				}
+
 			}
 		}
 	}
@@ -383,6 +416,8 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 		JTextNombreMascota.setText("");
 		JTextRaza.setText("");
 		JTextPeso.setText("");
+		JTextAltura.setText("");
+		JTextEdad.setText("");
 		JTextColor.setText("");
 	}
 }

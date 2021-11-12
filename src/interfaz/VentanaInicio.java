@@ -18,7 +18,6 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	private SafePet miSafePet;
 	
 	private JPanel contentPane;
-	private static final String LOGO = "./img/Logo.png";
 	private static final String FONDO = "./img/Fondo.png";
 	private static final String BTNINGRESAR = "./img/BtnIngresar.png";
 	private static final String BTNSIMULAR = "./img/BtnSimular.png";

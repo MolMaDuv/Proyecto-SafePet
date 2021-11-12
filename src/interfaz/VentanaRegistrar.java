@@ -26,7 +26,7 @@ public class VentanaRegistrar extends JFrame implements ActionListener {
 	private JPanel contentPane;
 
 	private SafePet miSafePet;
-	private VentanaLogin miVentanaLogin;
+	private VentanaFuncionario miVentanaFuncionario;
 
 	private JTextField JTextId;
 	private JTextField JTextNombre;
@@ -52,11 +52,11 @@ public class VentanaRegistrar extends JFrame implements ActionListener {
 	 * @param miSafePet2
 	 * @param ventanaLogin
 	 */
-	public VentanaRegistrar(VentanaLogin miVentanaLogin, SafePet miSafePet) {
+	public VentanaRegistrar(VentanaFuncionario miVentanaFuncionario, SafePet miSafePet) {
 
 		setTitle("SafePet UQ");
 
-		this.miVentanaLogin = miVentanaLogin;
+		this.miVentanaFuncionario = miVentanaFuncionario;
 		this.miSafePet = miSafePet;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -193,19 +193,28 @@ public class VentanaRegistrar extends JFrame implements ActionListener {
 
 				if (validacioUsuario == false) {
 
-					Afiliado miAfiliado = new Afiliado(id, nombre, telefono, direccion, correo, edad, 0, null);
+					Afiliado miAfiliado = new Afiliado(id, nombre, telefono, direccion, correo, edad, 0);
 					miSafePet.agregarUsuario(miAfiliado);
 					JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+					limpiar();
 				}
 			}
-
 		}
 
 		if (e.getSource() == btnAtras) {
 
-			miVentanaLogin.setVisible(true);
-			miVentanaLogin.setLocationRelativeTo(null);
+			miVentanaFuncionario.setVisible(true);
+			miVentanaFuncionario.setLocationRelativeTo(null);
 			setVisible(false);
 		}
+	}
+
+	private void limpiar() {
+		JTextId.setText("");
+		JTextNombre.setText("");
+		JTextTelefono.setText("");
+		JTextDireccion.setText("");
+		JTextCorreo.setText("");
+		JTextEdad.setText("");
 	}
 }

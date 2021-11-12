@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import mundo.Empleado;
 import mundo.SafePet;
 
 import javax.swing.JButton;
@@ -17,6 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 public class VentanaLogin extends JFrame implements ActionListener {
 
@@ -35,6 +37,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private static final String LATERALIZQUIERDO = "./img/LateralIzquierdo.png";
 
 	private JComboBox comboBoxRol;
+	private JTextField JTextContraseña;
 
 	private JButton btnIngresar;
 	private JButton btnRegistrar;
@@ -94,7 +97,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		contentPane.add(lblUsuario);
 
 		comboBoxRol = new JComboBox();
-		comboBoxRol.setModel(new DefaultComboBoxModel(new String[] { "", "Funcionario", "Afiliado" }));
+		comboBoxRol.setModel(new DefaultComboBoxModel(new String[] { "", "Afiliado", "Funcionario", "Veterinario"}));
 		comboBoxRol.setBounds(270, 184, 110, 20);
 		contentPane.add(comboBoxRol);
 
@@ -103,7 +106,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		lblContraseña.setBounds(230, 215, 30, 20);
 		contentPane.add(lblContraseña);
 
-		JTextField JTextContraseña = new JTextField();
+		JTextContraseña = new JTextField();
 		JTextContraseña.setColumns(10);
 		JTextContraseña.setBounds(270, 215, 110, 20);
 		contentPane.add(JTextContraseña);
@@ -125,7 +128,43 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == btnIngresar) {
-
+			
+			String tipoPersona = (String) comboBoxRol.getSelectedItem();
+			int id = Integer.parseInt(JTextContraseña.getText());
+			boolean validacion;
+			
+			if(tipoPersona == "") {
+				
+			}
+			
+			if(tipoPersona == "Funcionario") {
+				validacion = miSafePet.validarPersona(tipoPersona, id);
+				
+				if(validacion == true) {
+					
+					Empleado miEmpleado = miSafePet.buscarFuncionario(id);
+					
+					VentanaFuncionario miVentanaFuncionario = new VentanaFuncionario(this, miSafePet, miEmpleado);
+					miVentanaFuncionario.setVisible(true);
+					miVentanaFuncionario.setLocationRelativeTo(null);
+					setVisible(false);
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "No existe ningun funcionario con los datos ingresados", "Error en login",
+							JOptionPane.WARNING_MESSAGE);
+				}
+			}
+			
+			if(tipoPersona == "Afiliado") {
+				validacion = miSafePet.validarPersona(tipoPersona, id);
+				
+				if(validacion == true) {
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "No existe ningun afiliado con los datos ingresados", "Error en login",
+							JOptionPane.WARNING_MESSAGE);
+				}
+			}
 		}
 
 		if (e.getSource() == btnAtras) {
@@ -137,10 +176,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 		if (e.getSource() == btnRegistrar) {
 
-			VentanaRegistrar miVentanaRegistrar = new VentanaRegistrar(this, miSafePet);
-			miVentanaRegistrar.setVisible(true);
-			miVentanaRegistrar.setLocationRelativeTo(null);
-			setVisible(false);
+			
 		}
 
 	}

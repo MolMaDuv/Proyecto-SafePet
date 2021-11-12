@@ -52,13 +52,14 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		lblFondo.setBounds(0, 0, 604, 361);
 		contentPane.add(lblFondo);
 		
-		
 	}
 	
 
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == btnIngresar) {	
+			
+			miSafePet.agregarFuncionario();
 			
 			VentanaInicio miVentanaInicio = new VentanaInicio(this, miSafePet);
 			miVentanaInicio.setVisible(true);
