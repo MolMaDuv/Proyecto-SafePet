@@ -208,6 +208,5 @@ public class SafePet {
 		miPlan.setCodigo(contadorPlanes);
 		misPlanes.add(miPlan);
 	}
-
-
+	
 }

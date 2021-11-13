@@ -35,7 +35,7 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 	private SafePet miSafePet;
 	private Afiliado miAfiliado;
 	private Empleado miEmpleado;
-	private ArrayList<Beneficiario> misBeneficiarios;
+	private ArrayList<Beneficiario> misBeneficiarios = new ArrayList<Beneficiario>();
 
 	private JPanel contentPane;
 	private static final String FONDO = "./img/fondoGrande.png";
@@ -377,6 +377,7 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 
 				String respuestaSimulacion = miSafePet.calcularPlanSimulacion(contadorMascotas, consultas, ambulancia,
 						asistencia, tres, seis, doce);
+				
 				
 				int i = JOptionPane.showConfirmDialog(this, respuestaSimulacion + "\n\n¿Desea continuar con el plan?");
 					

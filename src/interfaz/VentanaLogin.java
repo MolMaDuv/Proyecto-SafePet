@@ -97,7 +97,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		contentPane.add(lblUsuario);
 
 		comboBoxRol = new JComboBox();
-		comboBoxRol.setModel(new DefaultComboBoxModel(new String[] { "", "Afiliado", "Funcionario", "Veterinario"}));
+		comboBoxRol.setModel(new DefaultComboBoxModel(new String[] { "", "Afiliado", "Funcionario"}));
 		comboBoxRol.setBounds(270, 184, 110, 20);
 		contentPane.add(comboBoxRol);
 
@@ -159,6 +159,11 @@ public class VentanaLogin extends JFrame implements ActionListener {
 				validacion = miSafePet.validarPersona(tipoPersona, id);
 				
 				if(validacion == true) {
+					
+					VentanaAfiliado miVentanaAfiliado = new VentanaAfiliado(this, miSafePet);
+					miVentanaAfiliado.setVisible(true);
+					miVentanaAfiliado.setLocationRelativeTo(null);
+					setVisible(false);
 					
 				} else {
 					JOptionPane.showMessageDialog(null, "No existe ningun afiliado con los datos ingresados", "Error en login",
