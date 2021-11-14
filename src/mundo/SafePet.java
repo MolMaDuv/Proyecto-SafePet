@@ -13,7 +13,11 @@ public class SafePet {
 	private ArrayList<Empleado> misEmpleados;
 	private ArrayList<Plan> misPlanes;
 	private ArrayList<Prestacion> misPrestaciones;
-	private ArrayList<Calificacion> misCalificaciones;
+	private ArrayList<Calificacion> misCalificaciones;	
+	private ArrayList<Copago> misCopagos;	
+	
+	
+	
 
 	public SafePet() {
 		
@@ -21,6 +25,8 @@ public class SafePet {
 		misEmpleados= new ArrayList<Empleado>();
 		misPlanes = new ArrayList<Plan>();
 		misCalificaciones= new ArrayList<Calificacion>();
+		misPrestaciones = new ArrayList<Prestacion>();
+		misCopagos = new ArrayList<Copago>();
 	}
 	
 	public void agregarFuncionario() {
@@ -56,6 +62,53 @@ public class SafePet {
 		
 		return validacion;
 	}
+	
+	public String registrarCopago(int prestacion)
+	{
+		Prestacion miPrestacion;
+		Plan miPlan;
+		String mensaje ="Informacion de Copago  \n";
+		String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+		int codigoArray = 0;
+
+		for (int i = 0; i < misPrestaciones.size(); i++) 
+		{
+	
+			miPrestacion = misPrestaciones.get(i);
+			if (miPrestacion.getCodigoConsulta()==prestacion) 
+			{
+				miPrestacion = misPrestaciones.get(i);
+				int cedula = miPrestacion.getCodigoAfiliado();
+				for (int j = 0; j < misPlanes.size(); j++) 
+				{
+					miPlan  = misPlanes.get(j);
+
+					if (misPlanes.get(j).getMiAfiliado().getId()==cedula) {
+						
+						mensaje += "Fecha:" + timeStamp + "Codigo Afiliado: " + miPrestacion.getCodigoAfiliado() +
+								"" + miPrestacion.getCodigoConsulta() + "Valor a Pagar: " + miPlan.getValor()  ;
+						
+						String copago =  "Codigo Afiliado: " + miPrestacion.getCodigoAfiliado() +
+								"" + miPrestacion.getCodigoConsulta() + "Valor a Pagar: " + miPlan.getValor() ;
+						
+						codigoArray = misCopagos.size()+1;
+						
+						Copago miCopago = new Copago(codigoArray, misPlanes.get(j).getMiAfiliado(), miPlan.getValor());
+							
+						
+						misCopagos.add(miCopago);
+					
+					
+					}
+					
+	
+					}
+				}
+			
+		}
+		return mensaje;
+	}
+	
 
 	public String calcularPlanSimulacion(int contadorMascotas, boolean consultas, boolean ambulancia, boolean asistencia, boolean tres, boolean seis, boolean doce) {
 		
@@ -185,6 +238,22 @@ public class SafePet {
 		
 		return validacion;
 	}
+	
+public Prestacion buscarPrestacionD(int id) {
+		
+		Prestacion miPrestacion = null;
+		
+		for (int i = 0; i < misPrestaciones.size(); i++) {
+			
+			Prestacion miA = misPrestaciones.get(i);
+			
+			if(miA.getCodigoConsulta() == id) {
+				miPrestacion = miA;
+			}
+		}
+		return miPrestacion;
+	}
+	
 
 	public Afiliado buscarUsuario(int id) {
 		
@@ -232,7 +301,7 @@ public class SafePet {
 			misPrestaciones.add(miPrestacion);
 			
 			JOptionPane.showMessageDialog(null, "Prestacion agregada");
-			
+			JOptionPane.showMessageDialog(null, "Consecutivo No. " + contadorRegistrosAtencion);
 			
 	}
 
@@ -325,14 +394,12 @@ public class SafePet {
 		
 		Plan miPlan = null;
 		int miAfiliado;
-		System.out.println(id);
 		
 		for (int i = 0; i < misPlanes.size(); i++) {
 			
 			String mensaje = "---------------Informacion Copago  -------------------" + "\n";
 			miPlan = misPlanes.get(i);
 			miAfiliado = miPlan.getMiAfiliado().getId();
-			System.out.println(miAfiliado);
 			String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
 			
 			
@@ -347,5 +414,9 @@ public class SafePet {
 		
 
 	}
+	
+	
+	
+	
 	
 }

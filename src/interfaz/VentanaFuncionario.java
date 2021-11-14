@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import mundo.Afiliado;
 import mundo.Empleado;
+import mundo.Prestacion;
 import mundo.SafePet;
 import javax.swing.SwingConstants;
 import java.awt.Color;
@@ -148,13 +149,20 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 		}
 		
 		if(e.getSource() == btnRegistrarCopago) {
+			int prestacion = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el codigo de prestacion"));
+			Prestacion miPrestacion = miSafePet.buscarPrestacionD(prestacion);
+			if (miPrestacion != null) {
+				String respuesta = miSafePet.registrarCopago(prestacion);
+				JOptionPane.showConfirmDialog(this, respuesta + "\n\n¿Desea cancelar copago");
+				JOptionPane.showMessageDialog(null, "Copago Registrado");
+			}
 			
 		}
 		
 		if(e.getSource() == btnAgregarUsuario) {
 			VentanaRegistrar miVentanaRegistrar = new VentanaRegistrar(this, miSafePet);
 			miVentanaRegistrar.setVisible(true);
-			miVentanaRegistrar.setLocationRelativeTo(null);
+			miVentanaRegistrar.setLocationRelativeTo(null);	
 			setVisible(false);
 			
 		}

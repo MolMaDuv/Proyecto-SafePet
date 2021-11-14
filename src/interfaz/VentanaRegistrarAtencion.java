@@ -144,6 +144,7 @@ public class VentanaRegistrarAtencion extends JFrame implements ActionListener
 			Prestacion miPrestacion = new Prestacion(0, codigoA,codigoB,fecha, motivoString, diagnotico, tratamiento);
 			 
 			 miSafePet.agregarRegistroAtencion(miPrestacion);
+			 
 			 }
 			 
 			 else 
