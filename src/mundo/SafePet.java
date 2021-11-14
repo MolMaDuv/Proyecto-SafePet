@@ -248,4 +248,44 @@ public class SafePet {
 		return buscado;
 	}	
 	
+	public String revisarPlan(int idAfiliado) {
+		String msj="";
+		
+		for (int i = 0; i < misPlanes.size(); i++) {
+			
+			Afiliado miPlanAfiliado = misPlanes.get(i).getMiAfiliado();
+			int idGuardado = miPlanAfiliado.getId();
+			
+			
+			if((idGuardado) == idAfiliado) {
+				//Codigo
+				msj+= misPlanes.get(i).getCodigo()+"\n";
+				//copago
+				msj+= misPlanes.get(i).getCopago()+"\n";
+				//Cantidad mascotas
+				msj+= obtenerMisBeneficios(misPlanes.get(i).getMisBeneficiarios())+"\n";
+				//valor
+				msj+= misPlanes.get(i).getValor()+"\n";
+				//Servicio Ambulancia
+				msj+= misPlanes.get(i).isAmbulancia()+"\n";
+				//Servicio Asistencia
+				msj+= misPlanes.get(i).isAsistenciaCasa()+"\n";
+				//Servicio consultas
+				msj+= misPlanes.get(i).isConsultas()+"\n";
+				
+				
+			}
+		}
+		return msj;
+	}
+
+	private String obtenerMisBeneficios(ArrayList<Beneficiario> misMascotas) {
+		// TODO Auto-generated method stub
+		int acum=0;
+		for (int i = 0; i < misMascotas.size(); i++) {
+			acum++;
+		}
+			
+		return ""+acum;
+	}
 }

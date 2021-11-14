@@ -187,4 +187,10 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		}
 
 	}
+	/**
+	 * @return the jTextContraseña
+	 */
+	public JTextField getJTextContraseña() {
+		return JTextContraseña;
+	}
 }

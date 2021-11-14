@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import mundo.Afiliado;
@@ -27,13 +28,13 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 	
 	private JButton btnAtras;
 	private JButton btnRevisarPrestaciones;
+	private JButton btnRevisarPlan;
 
 	public VentanaAfiliado(VentanaLogin miVentanaLogin, SafePet miSafePet, Afiliado miAfiliado) {
 
 		this.miVentanaLogin = miVentanaLogin;
 		this.miSafePet = miSafePet;
 		this.miAfiliado= miAfiliado;
-
 		setTitle("SafePet UQ");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,8 +65,9 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 		lblLateralDerecho.setBounds(515, 98, 50, 210);
 		contentPane.add(lblLateralDerecho);
 		
-		JButton btnRevisarPlan = new JButton("Plan");
+		btnRevisarPlan = new JButton("Plan");
 		btnRevisarPlan.setBounds(244, 98, 110, 30);
+		btnRevisarPlan.addActionListener(this);
 		contentPane.add(btnRevisarPlan);
 		
 		 btnRevisarPrestaciones = new JButton("Prestaciones");
@@ -84,6 +86,7 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if(e.getSource()==btnAtras) {
 		miVentanaLogin.setVisible(true);
 		miVentanaLogin.setLocationRelativeTo(null);
@@ -98,6 +101,14 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 			miVentanaRevisarPrestaciones.setLocationRelativeTo(null);
 			setVisible(false);
 			
+		}
+		
+		if (e.getSource() == btnRevisarPlan) {
+			int id=miAfiliado.getId();
+			VentanaRevisarPlan miVentanaRevisarPlan= new VentanaRevisarPlan(this, miSafePet,id);
+			miVentanaRevisarPlan.setVisible(true);
+			miVentanaRevisarPlan.setLocationRelativeTo(null);
+			setVisible(false);
 		}
 	}
 }
