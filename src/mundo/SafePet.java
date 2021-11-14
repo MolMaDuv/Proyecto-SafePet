@@ -1,18 +1,25 @@
 package mundo;
 
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.JOptionPane;
 
 public class SafePet {
 	
 	private ArrayList<Afiliado> misAfiliados;
 	private ArrayList<Empleado> misEmpleados;
 	private ArrayList<Plan> misPlanes;
+	private ArrayList<Prestacion> misPrestaciones;
 
 	public SafePet() {
 		
 		misAfiliados= new ArrayList<Afiliado>();	
 		misEmpleados= new ArrayList<Empleado>();
 		misPlanes = new ArrayList<Plan>();
+		misPrestaciones= new ArrayList<Prestacion>();
+		
+		
 	}
 	
 	public void agregarFuncionario() {
@@ -208,5 +215,37 @@ public class SafePet {
 		miPlan.setCodigo(contadorPlanes);
 		misPlanes.add(miPlan);
 	}
+
+	public void agregarRegistroAtencion(Prestacion miPrestacion) {
+		
+		
+	
+			
+			int contadorRegistrosAtencion =misPrestaciones.size() +1 ;
+			miPrestacion.setCodigoConsulta(contadorRegistrosAtencion);
+			misPrestaciones.add(miPrestacion);
+			
+			JOptionPane.showMessageDialog(null, "Prestacion agregada");
+			
+			
+	}
+
+	public ArrayList<Prestacion> buscarPrestaciones(int id) 
+	
+	{
+		ArrayList<Prestacion> buscado = new ArrayList<Prestacion>() ;
+		
+		for(int i = 0 ; i<misPrestaciones.size(); i++) 
+		{
+			int miA= misPrestaciones.get(i).getCodigoAfiliado();
+			if(miA== id) 
+			{
+				buscado.add(misPrestaciones.get(i));
+			}
+			
+		}
+		
+		return buscado;
+	}	
 	
 }

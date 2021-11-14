@@ -40,6 +40,7 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 	private JButton btnAgregarUsuario;
 	private JButton btnConfeccionarPlan;
 	private JButton btnModificarPlan;
+	private JButton btnRegistrarAtencion ;
 
 	public VentanaFuncionario(VentanaLogin miVentanaLogin, SafePet miSafePet, Empleado miEmpleado) {
 
@@ -116,8 +117,9 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 		btnModificarPlan.addActionListener(this);
 		contentPane.add(btnModificarPlan);
 		
-		JButton btnRegistrarAtencion = new JButton("Registrar atencion");
+		btnRegistrarAtencion = new JButton("Registrar atencion");
 		btnRegistrarAtencion.setBounds(319, 252, 140, 30);
+		btnRegistrarAtencion.addActionListener(this);
 		contentPane.add(btnRegistrarAtencion);
 		
 		JLabel lblFondo = new JLabel(new ImageIcon(FONDO));
@@ -174,5 +176,17 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 			miVentanaLogin.setLocationRelativeTo(null);
 			setVisible(false);
 		}
+		
+		if(e.getSource()== btnRegistrarAtencion) 
+		{
+			
+			VentanaRegistrarAtencion miVentanaRegistrarAtencion = new VentanaRegistrarAtencion(this, miSafePet);
+			miVentanaRegistrarAtencion.setVisible(true);
+			miVentanaRegistrarAtencion.setLocationRelativeTo(null);
+			setVisible(false);
+			
+			
+			}
+		
 	}
 }

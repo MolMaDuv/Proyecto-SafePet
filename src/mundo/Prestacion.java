@@ -4,8 +4,16 @@ import java.util.Date;
 
 public class Prestacion {
 
+	public int getCodigoAfiliado() {
+		return codigoAfiliado;
+	}
+	public void setCodigoAfiliado(int codigoAfiliado) {
+		this.codigoAfiliado = codigoAfiliado;
+	}
 	private int codigoConsulta;
-	private Date fechaConsulta;
+	private int codigoAfiliado;
+	private int codigoBeneficiario;
+	private String fechaConsulta;
 	private String motivo;
 	private String diagnostico;
 	private String tratamiento;
@@ -24,13 +32,13 @@ public class Prestacion {
 	/**
 	 * @return the fechaConsulta
 	 */
-	public Date getFechaConsulta() {
+	public String getFechaConsulta() {
 		return fechaConsulta;
 	}
 	/**
 	 * @param fechaConsulta the fechaConsulta to set
 	 */
-	public void setFechaConsulta(Date fechaConsulta) {
+	public void setFechaConsulta(String fechaConsulta) {
 		this.fechaConsulta = fechaConsulta;
 	}
 	/**
@@ -69,9 +77,20 @@ public class Prestacion {
 	public void setTratamiento(String tratamiento) {
 		this.tratamiento = tratamiento;
 	}
-	public Prestacion(int codigoConsulta, Date fechaConsulta, String motivo, String diagnostico, String tratamiento) {
+	
+	
+	public int getCodigoBeneficiario() {
+		return codigoBeneficiario;
+	}
+	public void setCodigoBeneficiario(int codigoBeneficiario) {
+		this.codigoBeneficiario = codigoBeneficiario;
+	}
+	public Prestacion(int codigoConsulta, int codigoAfiliado, int codigoBeneficiario, String fechaConsulta,
+			String motivo, String diagnostico, String tratamiento) {
 		super();
 		this.codigoConsulta = codigoConsulta;
+		this.codigoAfiliado = codigoAfiliado;
+		this.codigoBeneficiario = codigoBeneficiario;
 		this.fechaConsulta = fechaConsulta;
 		this.motivo = motivo;
 		this.diagnostico = diagnostico;

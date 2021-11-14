@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import mundo.Afiliado;
 import mundo.SafePet;
 
 public class VentanaAfiliado extends JFrame implements ActionListener {
@@ -17,7 +18,7 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 
 	private VentanaLogin miVentanaLogin;
 	private SafePet miSafePet;
-	
+	private Afiliado miAfiliado;
 	private static final String FONDO = "./img/Fondo.png";
 	private static final String BTNATRAS = "./img/BtnAtras.png";
 	private static final String LOGOESQUINA = "./img/LogoEsquina.png";
@@ -25,11 +26,13 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 	private static final String LATERALIZQUIERDO = "./img/LateralIzquierdo.png";
 	
 	private JButton btnAtras;
+	private JButton btnRevisarPrestaciones;
 
-	public VentanaAfiliado(VentanaLogin miVentanaLogin, SafePet miSafePet) {
+	public VentanaAfiliado(VentanaLogin miVentanaLogin, SafePet miSafePet, Afiliado miAfiliado) {
 
 		this.miVentanaLogin = miVentanaLogin;
 		this.miSafePet = miSafePet;
+		this.miAfiliado= miAfiliado;
 
 		setTitle("SafePet UQ");
 		
@@ -65,8 +68,9 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 		btnRevisarPlan.setBounds(244, 98, 110, 30);
 		contentPane.add(btnRevisarPlan);
 		
-		JButton btnRevisarPrestaciones = new JButton("Prestaciones");
+		 btnRevisarPrestaciones = new JButton("Prestaciones");
 		btnRevisarPrestaciones.setBounds(244, 150, 110, 30);
+		btnRevisarPrestaciones.addActionListener(this);
 		contentPane.add(btnRevisarPrestaciones);
 		
 		JButton btnEvaluarServicio = new JButton("Evaluar servicio");
@@ -80,10 +84,20 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		if(e.getSource()==btnAtras) {
 		miVentanaLogin.setVisible(true);
 		miVentanaLogin.setLocationRelativeTo(null);
 		setVisible(false);
+		}
 		
+		
+		if(e.getSource()==btnRevisarPrestaciones) 
+		{
+			VentanaRevisarPrestaciones miVentanaRevisarPrestaciones = new VentanaRevisarPrestaciones(this,miSafePet,miAfiliado);
+			miVentanaRevisarPrestaciones.setVisible(true);
+			miVentanaRevisarPrestaciones.setLocationRelativeTo(null);
+			setVisible(false);
+			
+		}
 	}
 }

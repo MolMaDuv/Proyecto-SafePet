@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import mundo.Afiliado;
 import mundo.Empleado;
 import mundo.SafePet;
 
@@ -157,10 +158,11 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			
 			if(tipoPersona == "Afiliado") {
 				validacion = miSafePet.validarPersona(tipoPersona, id);
+				Afiliado miAfiliado = miSafePet.buscarUsuario(id);
 				
 				if(validacion == true) {
 					
-					VentanaAfiliado miVentanaAfiliado = new VentanaAfiliado(this, miSafePet);
+					VentanaAfiliado miVentanaAfiliado = new VentanaAfiliado(this, miSafePet,miAfiliado);
 					miVentanaAfiliado.setVisible(true);
 					miVentanaAfiliado.setLocationRelativeTo(null);
 					setVisible(false);
