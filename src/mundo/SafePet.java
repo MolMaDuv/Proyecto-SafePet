@@ -414,6 +414,65 @@ public Prestacion buscarPrestacionD(int id) {
 		
 
 	}
+
+
+
+	public ArrayList<Beneficiario> traerBeneficiarios(String idAfiliado) {
+	int idAfiliadoC = Integer.parseInt(idAfiliado);
+	ArrayList<Beneficiario> listaMascotasDeAfiliado = new ArrayList<Beneficiario>();
+	boolean bandera=false;
+		for (int i = 0; i < misPlanes.size() &&!bandera; i++) {
+			
+			Afiliado miPlanAfiliado = misPlanes.get(i).getMiAfiliado();
+			int idGuardado = miPlanAfiliado.getId();
+			
+			if(idGuardado == idAfiliadoC) {
+				bandera=true;
+				listaMascotasDeAfiliado= misPlanes.get(i).getMisBeneficiarios();
+				return listaMascotasDeAfiliado;
+				
+			}
+				
+		}
+		return listaMascotasDeAfiliado;
+		
+	}
+	
+	public boolean validarExistenciaUsuarioEnPlan(String idAfiliado) {
+		int idAfiliadoC = Integer.parseInt(idAfiliado);
+		boolean bandera=false;
+		
+			for (int i = 0; i < misPlanes.size() &&!bandera; i++) {
+				Afiliado miPlanAfiliado = misPlanes.get(i).getMiAfiliado();
+				int idGuardado = miPlanAfiliado.getId();
+					if(idGuardado == idAfiliadoC) {
+						bandera=true;
+					}
+			}
+		return bandera;
+	}
+		
+	
+	public void añadirBeneficiarioAlplan(String idAfiliado, Beneficiario miBeneficiario) {
+		int idAfiliadoC = Integer.parseInt(idAfiliado);
+		ArrayList<Beneficiario> listaMascotasDeAfiliado = new ArrayList<Beneficiario>();
+
+		boolean bandera=false;
+			for (int i = 0; i < misPlanes.size() &&!bandera; i++) {
+				
+				Afiliado miPlanAfiliado = misPlanes.get(i).getMiAfiliado();
+				int idGuardado = miPlanAfiliado.getId();
+				
+				if(idGuardado == idAfiliadoC) {
+					bandera=true;
+					listaMascotasDeAfiliado= misPlanes.get(i).getMisBeneficiarios();
+					listaMascotasDeAfiliado.add(miBeneficiario);
+					misPlanes.get(i).setMisBeneficiarios(listaMascotasDeAfiliado);
+				}
+					
+			}
+	}
+
 	
 	
 	

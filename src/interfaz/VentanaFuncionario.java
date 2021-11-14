@@ -26,6 +26,8 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 	private JPanel contentPane;
 
 	private VentanaLogin miVentanaLogin;
+
+
 	private SafePet miSafePet;
 	private Empleado miEmpleado;
 
@@ -188,7 +190,18 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 		}
 		
 		if(e.getSource() == btnModificarPlan) {
-			
+			String id= JOptionPane.showInputDialog(null, "Ingrese el ID del afiliado");
+			boolean bandera= miSafePet.validarExistenciaUsuarioEnPlan(id);
+			if(bandera){
+				VentanaModificarPlan miVentanaModificarPlan=new VentanaModificarPlan(miVentanaLogin, miEmpleado,miSafePet, id);
+				miVentanaModificarPlan.setVisible(true);
+				miVentanaModificarPlan.setLocationRelativeTo(null);
+				setVisible(false);
+			}else{
+				JOptionPane.showMessageDialog(null, "El afiliado " + id + " no tiene un plan ", "Afiliado Sin Plan",
+						JOptionPane.WARNING_MESSAGE);
+			}
+		 
 		}
 		
 		if(e.getSource() == btnAtras) {

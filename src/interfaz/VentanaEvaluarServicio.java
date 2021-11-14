@@ -48,7 +48,7 @@ public class VentanaEvaluarServicio extends JFrame implements ActionListener {
 	int numEstrellas=0;
 	int idPerson=0;
 	public VentanaEvaluarServicio(VentanaAfiliado miVentanaAfiliado, SafePet miSafePet, int idPersona) {
-
+		
 		this.miVentanaAfiliado = miVentanaAfiliado;
 		this.miSafePet = miSafePet;
 		idPerson=idPersona;
@@ -211,6 +211,8 @@ public class VentanaEvaluarServicio extends JFrame implements ActionListener {
 	
 	
 	}	
+	
+
 	
 	public void limpiarInterfaz() {
 		textObsevaciones.setText("");
