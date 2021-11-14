@@ -11,21 +11,25 @@ public class SafePet {
 	private ArrayList<Empleado> misEmpleados;
 	private ArrayList<Plan> misPlanes;
 	private ArrayList<Prestacion> misPrestaciones;
+	private ArrayList<Calificacion> misCalificaciones;
 
 	public SafePet() {
 		
 		misAfiliados= new ArrayList<Afiliado>();	
 		misEmpleados= new ArrayList<Empleado>();
 		misPlanes = new ArrayList<Plan>();
-		misPrestaciones= new ArrayList<Prestacion>();
-		
-		
+		misCalificaciones= new ArrayList<Calificacion>();
 	}
 	
 	public void agregarFuncionario() {
 		
 		Empleado miEmpleado = new Empleado(1234, "Luis Miguel Mejia", "3007502536", "Armenia", "luisMiguel@gmail.com", 30, 1002, 2000000);
 		misEmpleados.add(miEmpleado);
+	}
+	
+	public void agregarUsuario() {
+		Afiliado miAfiliado = new Afiliado(12, "Margarita", "314747", "Armenia", "mar@gmail.com", 30, 1);
+		misAfiliados.add(miAfiliado);
 	}
 	
 	public void agregarUsuario( Afiliado miAfiliado ) {
@@ -288,4 +292,31 @@ public class SafePet {
 			
 		return ""+acum;
 	}
+
+	public String evaluarServicio(int idPersona, int numEstrellas, String observaciones) {
+		Calificacion miCalificacion= new Calificacion(idPersona, numEstrellas, observaciones);
+		String nombre= buscarPorId(idPersona);
+		misCalificaciones.add(miCalificacion);
+		String mensaje= "Sr(a) " + nombre +
+				"\n\n" + "Ha calificado con " + numEstrellas + " Estrellas nuestros servicios" +
+				"\n\n" + "Observaciones: "+ observaciones +
+				"\n\n" + "Calificacion exitosa"  ;
+		return mensaje;
+		
+	}
+
+
+	private String buscarPorId(int idPersona) {
+	String nombreAfiliado="";
+	boolean encontrado=false;
+		for(int i=0; i< misAfiliados.size() && !encontrado;i++){
+			if(misAfiliados.get(i).getId()==idPersona){
+				encontrado=true;
+				nombreAfiliado= misAfiliados.get(i).getNombre();
+			}
+			
+		}
+	return 	nombreAfiliado;
+	}
+	
 }

@@ -20,6 +20,7 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 	private VentanaLogin miVentanaLogin;
 	private SafePet miSafePet;
 	private Afiliado miAfiliado;
+	
 	private static final String FONDO = "./img/Fondo.png";
 	private static final String BTNATRAS = "./img/BtnAtras.png";
 	private static final String LOGOESQUINA = "./img/LogoEsquina.png";
@@ -29,6 +30,8 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 	private JButton btnAtras;
 	private JButton btnRevisarPrestaciones;
 	private JButton btnRevisarPlan;
+	private JButton btnCalificar;
+
 
 	public VentanaAfiliado(VentanaLogin miVentanaLogin, SafePet miSafePet, Afiliado miAfiliado) {
 
@@ -56,6 +59,7 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 		btnAtras.setBounds(10, 320, 110, 30);
 		btnAtras.addActionListener(this);
 		contentPane.add(btnAtras);
+	
 
 		JLabel lblLateralIzquierdo = new JLabel(new ImageIcon(LATERALIZQUIERDO));
 		lblLateralIzquierdo.setBounds(40, 98, 50, 210);
@@ -75,9 +79,12 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 		btnRevisarPrestaciones.addActionListener(this);
 		contentPane.add(btnRevisarPrestaciones);
 		
-		JButton btnEvaluarServicio = new JButton("Evaluar servicio");
-		btnEvaluarServicio.setBounds(244, 208, 110, 30);
-		contentPane.add(btnEvaluarServicio);
+
+		btnCalificar = new JButton("Evaluar servicio");
+		btnCalificar.setBounds(244, 208, 110, 30);
+		btnCalificar.addActionListener(this);
+		contentPane.add(btnCalificar); 
+
 		
 		JLabel lblFondo = new JLabel(new ImageIcon(FONDO));
 		lblFondo.setBounds(0, 0, 604, 361);
@@ -109,6 +116,15 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 			miVentanaRevisarPlan.setVisible(true);
 			miVentanaRevisarPlan.setLocationRelativeTo(null);
 			setVisible(false);
+		}
+		
+		if(e.getSource() == btnCalificar) {
+			int id=miAfiliado.getId();
+			VentanaEvaluarServicio miVentanaEvaluar = new VentanaEvaluarServicio(this, miSafePet, id);
+			miVentanaEvaluar.setVisible(true);
+			miVentanaEvaluar.setLocationRelativeTo(null);
+			setVisible(false);
+			
 		}
 	}
 }

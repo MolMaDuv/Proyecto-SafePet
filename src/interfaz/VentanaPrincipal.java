@@ -60,6 +60,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		if(e.getSource() == btnIngresar) {	
 			
 			miSafePet.agregarFuncionario();
+			miSafePet.agregarUsuario();
 			
 			VentanaInicio miVentanaInicio = new VentanaInicio(this, miSafePet);
 			miVentanaInicio.setVisible(true);
