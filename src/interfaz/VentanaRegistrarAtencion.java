@@ -1,13 +1,16 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.swing.Action;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -19,6 +22,7 @@ import mundo.SafePet;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 public class VentanaRegistrarAtencion extends JFrame implements ActionListener
@@ -30,16 +34,23 @@ public class VentanaRegistrarAtencion extends JFrame implements ActionListener
 	private JTextField capturaDiagnostivo;
 	private JTextField capturaTratamiento;
 	
-	private JButton botonAgregar;
+	private JButton btnAgregar;
 	private SafePet miSafePet;
 	private Prestacion miPrestacion;
 	private JTextField capturaAfiliado;
-	private JLabel lblNewLabel_4;
+	private JLabel lblCodigoAfiliado;
+	
+	private static final String FONDO = "./img/Fondo.png";
+	private static final String BTNATRAS = "./img/BtnAtras.png";
+	private static final String BTNAGREGAR = "./img/BtnAgregar.png";
+	private static final String LOGOESQUINA = "./img/LogoEsquina.png";
+	private static final String LATERALDERECHO = "./img/LateralDerecho.png";
+	private static final String LATERALIZQUIERDO = "./img/LateralIzquierdo.png";
 	
 	private SafePet misaSafePet;
 	private VentanaFuncionario miVentanaFuncionario;
-	private JButton botonAtras;
-	private JLabel lblNewLabel_5;
+	private JButton btnAtras;
+	private JLabel lblCodigoBeneficiario;
 	private final JTextField capturaBeneficiario = new JTextField();
 	
 	
@@ -58,68 +69,110 @@ public class VentanaRegistrarAtencion extends JFrame implements ActionListener
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Fecha de consulta");
-		lblNewLabel.setBounds(87, 78, 87, 14);
-		contentPane.add(lblNewLabel);
+		JLabel lblTitulo = new JLabel("INGRESE LOS SIGUIENTES DATOS");
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setBounds(10, 11, 584, 20);
+		contentPane.add(lblTitulo);
+
+		JLabel lblTextoSuperior = new JLabel("PARA REALIZAR LA PRESTACION");
+		lblTextoSuperior.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTextoSuperior.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTextoSuperior.setForeground(Color.WHITE);
+		lblTextoSuperior.setBounds(10, 31, 584, 20);
+		contentPane.add(lblTextoSuperior);
+		
+		JLabel lblFechaConsulta = new JLabel("Fecha de consulta");
+		lblFechaConsulta.setForeground(Color.WHITE);
+		lblFechaConsulta.setBounds(135, 131, 130, 14);
+		contentPane.add(lblFechaConsulta);
 		
 		capturaFecha = new JTextField();
-		capturaFecha.setBounds(201, 75, 194, 20);
+		lblTitulo.setForeground(Color.WHITE);
+		capturaFecha.setBounds(275, 128, 190, 20);
 		contentPane.add(capturaFecha);
 		capturaFecha.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Motivo de la consulta");
-		lblNewLabel_1.setBounds(87, 115, 157, 14);
-		contentPane.add(lblNewLabel_1);
+		JLabel lblMotivoConsulta = new JLabel("Motivo de la consulta");
+		lblMotivoConsulta.setForeground(Color.WHITE);
+		lblMotivoConsulta.setBounds(135, 172, 130, 14);
+		contentPane.add(lblMotivoConsulta);
 		
 		capturaMotivo = new JTextField();
-		capturaMotivo.setBounds(201, 112, 194, 48);
+		capturaMotivo.setBounds(275, 159, 190, 40);
 		contentPane.add(capturaMotivo);
 		capturaMotivo.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Diagnostico");
-		lblNewLabel_2.setBounds(87, 185, 123, 14);
-		contentPane.add(lblNewLabel_2);
+		JLabel lblDiagnostico = new JLabel("Diagnostico");
+		lblDiagnostico.setForeground(Color.WHITE);
+		lblDiagnostico.setBounds(135, 221, 130, 14);
+		contentPane.add(lblDiagnostico);
 		
 		capturaDiagnostivo = new JTextField();
-		capturaDiagnostivo.setBounds(201, 182, 194, 42);
+		capturaDiagnostivo.setBounds(275, 208, 190, 40);
 		contentPane.add(capturaDiagnostivo);
 		capturaDiagnostivo.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("Tratamiento");
-		lblNewLabel_3.setBounds(87, 260, 123, 14);
-		contentPane.add(lblNewLabel_3);
+		JLabel lblTratamiento = new JLabel("Tratamiento");
+		lblTratamiento.setForeground(Color.WHITE);
+		lblTratamiento.setBounds(135, 272, 130, 14);
+		contentPane.add(lblTratamiento);
 		
 		capturaTratamiento = new JTextField();
-		capturaTratamiento.setBounds(201, 257, 194, 48);
+		capturaTratamiento.setBounds(275, 259, 190, 40);
 		contentPane.add(capturaTratamiento);
 		capturaTratamiento.setColumns(10);
 		
-		 botonAgregar = new JButton("Agregar");
-		botonAgregar.setBounds(424, 302, 89, 23);
-		contentPane.add(botonAgregar);
-		botonAgregar.addActionListener(this);
+		JLabel lblLogoEsquina1 = new JLabel(new ImageIcon(LOGOESQUINA));
+		lblLogoEsquina1.setBounds(25, 11, 80, 80);
+		contentPane.add(lblLogoEsquina1);
+
+		JLabel lblLogoEsquina2 = new JLabel(new ImageIcon(LOGOESQUINA));
+		lblLogoEsquina2.setBounds(495, 11, 80, 80);
+		contentPane.add(lblLogoEsquina2);
+
+		btnAtras = new JButton(new ImageIcon(BTNATRAS));
+		btnAtras.setBounds(10, 319, 110, 30);
+		btnAtras.addActionListener(this);
+		contentPane.add(btnAtras);
+		
+		JLabel lblLateralIzquierdo = new JLabel(new ImageIcon(LATERALIZQUIERDO));
+		lblLateralIzquierdo.setBounds(40, 98, 50, 210);
+		contentPane.add(lblLateralIzquierdo);
+
+		JLabel lblLateralDerecho = new JLabel(new ImageIcon(LATERALDERECHO));
+		lblLateralDerecho.setBounds(515, 98, 50, 210);
+		contentPane.add(lblLateralDerecho);
+
+		btnAgregar = new JButton(new ImageIcon(BTNAGREGAR));
+		btnAgregar.setBounds(484, 319, 110, 30);
+		btnAgregar.addActionListener(this);
+		contentPane.add(btnAgregar);
 		
 		capturaAfiliado = new JTextField();
-		capturaAfiliado.setBounds(200, 11, 86, 20);
+		capturaAfiliado.setBounds(275, 64, 190, 20);
 		contentPane.add(capturaAfiliado);
 		capturaAfiliado.setColumns(10);
 		
-		lblNewLabel_4 = new JLabel("Codigo del afiliado");
-		lblNewLabel_4.setBounds(73, 14, 100, 14);
-		contentPane.add(lblNewLabel_4);
+		lblCodigoAfiliado = new JLabel("Codigo del afiliado");
+		lblCodigoAfiliado.setForeground(Color.WHITE);
+		lblCodigoAfiliado.setBounds(135, 67, 130, 14);
+		contentPane.add(lblCodigoAfiliado);
+			
 		
-		botonAtras = new JButton("Atras");
-		botonAtras.setBounds(24, 327, 89, 23);
-		contentPane.add(botonAtras);
-		
-		lblNewLabel_5 = new JLabel("codigo del beneficiario");
-		lblNewLabel_5.setBounds(73, 39, 46, 14);
-		contentPane.add(lblNewLabel_5);
+		lblCodigoBeneficiario = new JLabel("Codigo del beneficiario");
+		lblCodigoBeneficiario.setForeground(Color.WHITE);
+		lblCodigoBeneficiario.setBounds(135, 100, 130, 14);
+		contentPane.add(lblCodigoBeneficiario);
 		capturaBeneficiario.setText("");
-		capturaBeneficiario.setBounds(186, 42, 141, 20);
+		capturaBeneficiario.setBounds(275, 97, 190, 20);
 		contentPane.add(capturaBeneficiario);
 		capturaBeneficiario.setColumns(10);
-		botonAtras.addActionListener(this);
+		
+		JLabel lblFondo = new JLabel(new ImageIcon(FONDO));
+		lblFondo.setBounds(0, 0, 604, 361);
+		contentPane.add(lblFondo);
 	}
 	
 	
@@ -127,7 +180,7 @@ public class VentanaRegistrarAtencion extends JFrame implements ActionListener
 	{
 		
 		
-		if(e.getSource()==botonAgregar) 
+		if(e.getSource()==btnAgregar) 
 		{
 			 int codigoA= Integer.parseInt(capturaAfiliado.getText());
 			 int codigoB= Integer.parseInt(capturaBeneficiario.getText());
@@ -154,7 +207,7 @@ public class VentanaRegistrarAtencion extends JFrame implements ActionListener
 			 
 			 
 		}
-		if(e.getSource()==botonAtras) 
+		if(e.getSource()==btnAtras) 
 		{
 			miVentanaFuncionario.setVisible(true);
 			miVentanaFuncionario.setLocationRelativeTo(null);

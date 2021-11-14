@@ -70,18 +70,18 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 		contentPane.add(lblLateralDerecho);
 		
 		btnRevisarPlan = new JButton("Plan");
-		btnRevisarPlan.setBounds(244, 98, 110, 30);
+		btnRevisarPlan.setBounds(244, 98, 120, 30);
 		btnRevisarPlan.addActionListener(this);
 		contentPane.add(btnRevisarPlan);
 		
 		 btnRevisarPrestaciones = new JButton("Prestaciones");
-		btnRevisarPrestaciones.setBounds(244, 150, 110, 30);
+		btnRevisarPrestaciones.setBounds(244, 150, 120, 30);
 		btnRevisarPrestaciones.addActionListener(this);
 		contentPane.add(btnRevisarPrestaciones);
 		
 
 		btnCalificar = new JButton("Evaluar servicio");
-		btnCalificar.setBounds(244, 208, 110, 30);
+		btnCalificar.setBounds(244, 208, 120, 30);
 		btnCalificar.addActionListener(this);
 		contentPane.add(btnCalificar); 
 
@@ -113,6 +113,7 @@ public class VentanaAfiliado extends JFrame implements ActionListener {
 		if (e.getSource() == btnRevisarPlan) {
 			int id=miAfiliado.getId();
 			VentanaRevisarPlan miVentanaRevisarPlan= new VentanaRevisarPlan(this, miSafePet,id);
+			
 			miVentanaRevisarPlan.setVisible(true);
 			miVentanaRevisarPlan.setLocationRelativeTo(null);
 			setVisible(false);

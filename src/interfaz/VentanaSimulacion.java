@@ -38,6 +38,7 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 	private static final String FONDO = "./img/fondoGrande.png";
 	private static final String BTNATRAS = "./img/BtnAtras.png";
 	private static final String BTNSIMULAR = "./img/BtnSimular.png";
+	private static final String BTNAGREGAR = "./img/BtnAgregar.png";
 	private static final String LOGOESQUINA = "./img/LogoEsquina.png";
 	private static final String LATERALDERECHO = "./img/LateralDerechoGrande.png";
 	private static final String LATERALIZQUIERDO = "./img/LateralIzquierdoGrande.png";
@@ -177,6 +178,11 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 		btnSimular.setBounds(484, 520, 110, 30);
 		btnSimular.addActionListener(this);
 		contentPane.add(btnSimular);
+		
+		btnAgregar = new JButton(new ImageIcon(BTNAGREGAR));
+		btnAgregar.setBounds(252, 275, 110, 30);
+		btnAgregar.addActionListener(this);
+		contentPane.add(btnAgregar);
 
 		JLabel lblDatosMascota = new JLabel("DATOS MASCOTA(S)");
 		lblDatosMascota.setForeground(Color.WHITE);
@@ -223,11 +229,6 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 		JTextColor.setBounds(364, 244, 86, 20);
 		contentPane.add(JTextColor);
 		JTextColor.setColumns(10);
-
-		btnAgregar = new JButton("Agregar");
-		btnAgregar.setBounds(252, 275, 89, 23);
-		btnAgregar.addActionListener(this);
-		contentPane.add(btnAgregar);
 
 		modelo = new DefaultTableModel();
 

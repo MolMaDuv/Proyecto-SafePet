@@ -31,7 +31,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private static final String LOGOESQUINA = "./img/LogoEsquina.png";
 	private static final String FONDO = "./img/Fondo.png";
 	private static final String BTNINGRESAR = "./img/BtnIngresar.png";
-	private static final String BTNREGISTRAR = "./img/BtnRegistrar.png";
+	
 	private static final String BTNATRAS = "./img/BtnAtras.png";
 	private static final String LOGIN = "./img/Login.png";
 	private static final String LATERALDERECHO = "./img/LateralDerecho.png";
@@ -41,7 +41,6 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private JTextField JTextContraseña;
 
 	private JButton btnIngresar;
-	private JButton btnRegistrar;
 	private JButton btnAtras;
 	private JLabel lblIcono;
 
@@ -77,11 +76,6 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		btnIngresar.setBounds(253, 263, 110, 30);
 		btnIngresar.addActionListener(this);
 		contentPane.add(btnIngresar);
-
-		btnRegistrar = new JButton(new ImageIcon(BTNREGISTRAR));
-		btnRegistrar.setBounds(484, 320, 110, 30);
-		btnRegistrar.addActionListener(this);
-		contentPane.add(btnRegistrar);
 
 		btnAtras = new JButton(new ImageIcon(BTNATRAS));
 		btnAtras.setBounds(10, 320, 110, 30);
@@ -172,6 +166,9 @@ public class VentanaLogin extends JFrame implements ActionListener {
 							JOptionPane.WARNING_MESSAGE);
 				}
 			}
+		}else {
+			JOptionPane.showMessageDialog(null, "Seleccione por favor un Rol", "Error en login",
+					JOptionPane.WARNING_MESSAGE);
 		}
 
 		if (e.getSource() == btnAtras) {
@@ -181,16 +178,8 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			setVisible(false);
 		}
 
-		if (e.getSource() == btnRegistrar) {
-
-			
-		}
+	
 
 	}
-	/**
-	 * @return the jTextContraseña
-	 */
-	public JTextField getJTextContraseña() {
-		return JTextContraseña;
-	}
+	
 }

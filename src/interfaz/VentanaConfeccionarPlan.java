@@ -154,7 +154,12 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 		btnRegistrar.setBounds(484, 520, 110, 30);
 		btnRegistrar.addActionListener(this);
 		contentPane.add(btnRegistrar);
-
+		
+		btnAgregar = new JButton(new ImageIcon(BTNAGREGAR));
+		btnAgregar.setBounds(252, 275, 110, 30);
+		btnAgregar.addActionListener(this);
+		contentPane.add(btnAgregar);
+		
 		JLabel lblDatosMascota = new JLabel("DATOS MASCOTA(S)");
 		lblDatosMascota.setForeground(Color.WHITE);
 		lblDatosMascota.setHorizontalAlignment(SwingConstants.CENTER);
@@ -221,10 +226,7 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 		contentPane.add(JTextColor);
 		JTextColor.setColumns(10);
 
-		btnAgregar = new JButton(new ImageIcon(BTNAGREGAR));
-		btnAgregar.setBounds(257, 264, 110, 30);
-		btnAgregar.addActionListener(this);
-		contentPane.add(btnAgregar);
+		
 
 		modelo = new DefaultTableModel();
 

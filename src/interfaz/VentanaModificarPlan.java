@@ -45,7 +45,6 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 
 	private JButton btnAtras;
 	private JButton btnAgregar;
-	private JButton btnRegistrar;
 
 	private JCheckBox jcbConsultasIlimitadas;
 	private JCheckBox jcbAmbulancia;
@@ -150,11 +149,6 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 		btnAtras.addActionListener(this);
 		contentPane.add(btnAtras);
 
-		btnRegistrar = new JButton(new ImageIcon(BTNAGREGAR));
-		btnRegistrar.setBounds(484, 520, 110, 30);
-		btnRegistrar.addActionListener(this);
-		contentPane.add(btnRegistrar);
-
 		JLabel lblDatosMascota = new JLabel("DATOS MASCOTA(S)");
 		lblDatosMascota.setForeground(Color.WHITE);
 		lblDatosMascota.setHorizontalAlignment(SwingConstants.CENTER);
@@ -241,7 +235,7 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 
 		panelTabla = new JScrollPane(tabla, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		panelTabla.setBounds(100, 316, 405, 80);
+		panelTabla.setBounds(100, 316, 405, 150);
 		contentPane.add(panelTabla);
 
 	

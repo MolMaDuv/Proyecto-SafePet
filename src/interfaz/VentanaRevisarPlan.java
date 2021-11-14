@@ -1,6 +1,7 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,6 +12,7 @@ import mundo.SafePet;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -23,21 +25,19 @@ public class VentanaRevisarPlan extends JFrame implements ActionListener {
 	private SafePet miSafePet;
 	private int id;
 	
-	private JButton btnVerPlan;
+	private static final String FONDO = "./img/Fondo.png";
+	private static final String BTNATRAS = "./img/BtnAtras.png";
+	private static final String LOGOESQUINA = "./img/LogoEsquina.png";
+	private static final String LATERALDERECHO = "./img/LateralDerecho.png";
+	private static final String LATERALIZQUIERDO = "./img/LateralIzquierdo.png";
+	private static final String PERGAMINOREVISARPLAN = "./img/PergaminoRevisarPlan.png";
 	private JButton btnAtras;
 	private JTextField textFieldCodigo;
-	private JLabel lblCodigo;
-	private JLabel lblCopago;
 	private JTextField textFieldCopago;
-	private JLabel lblCantMascotas;
 	private JTextField textFieldCantMascotas;
-	private JLabel lblValor;
 	private JTextField textFieldValor;
-	private JLabel lblAmbulancia;
 	private JTextField textFieldAmbulancia;
-	private JLabel lblAsistencia;
 	private JTextField textFieldAsistencia;
-	private JLabel lblConsultas;
 	private JTextField textFieldConsulta;
 
 	/**
@@ -58,85 +58,118 @@ public class VentanaRevisarPlan extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		btnVerPlan = new JButton("Ver plan");
-		btnVerPlan.addActionListener(this);
 		
-		btnVerPlan.setBounds(505, 290, 89, 23);
-		contentPane.add(btnVerPlan);
-		
-		btnAtras = new JButton("atras");
+		JLabel lblLogoEsquina1 = new JLabel(new ImageIcon(LOGOESQUINA));
+		lblLogoEsquina1.setBounds(25, 11, 80, 80);
+		contentPane.add(lblLogoEsquina1);
+
+		JLabel lblLogoEsquina2 = new JLabel(new ImageIcon(LOGOESQUINA));
+		lblLogoEsquina2.setBounds(495, 11, 80, 80);
+		contentPane.add(lblLogoEsquina2);
+
+		btnAtras = new JButton(new ImageIcon(BTNATRAS));
+		btnAtras.setBounds(10, 320, 110, 30);
 		btnAtras.addActionListener(this);
-		btnAtras.setBounds(32, 290, 89, 23);
 		contentPane.add(btnAtras);
 		
+		JLabel lblLateralIzquierdo = new JLabel(new ImageIcon(LATERALIZQUIERDO));
+		lblLateralIzquierdo.setBounds(40, 98, 50, 210);
+		contentPane.add(lblLateralIzquierdo);
+
+		JLabel lblLateralDerecho = new JLabel(new ImageIcon(LATERALDERECHO));
+		lblLateralDerecho.setBounds(515, 98, 50, 210);
+		contentPane.add(lblLateralDerecho);
+		
 		textFieldCodigo = new JTextField();
-		textFieldCodigo.setBounds(305, 44, 86, 20);
+		textFieldCodigo.setEditable(false);
+		textFieldCodigo.setBounds(305, 88, 86, 20);
 		contentPane.add(textFieldCodigo);
 		textFieldCodigo.setColumns(10);
 		
-		lblCodigo = new JLabel("Codigo:");
-		lblCodigo.setBounds(219, 47, 60, 14);
-		contentPane.add(lblCodigo);
-		
-		lblCopago = new JLabel("Copago:");
-		lblCopago.setBounds(219, 89, 60, 14);
-		contentPane.add(lblCopago);
-		
 		textFieldCopago = new JTextField();
+		textFieldCopago.setEditable(false);
 		textFieldCopago.setColumns(10);
-		textFieldCopago.setBounds(305, 86, 86, 20);
+		textFieldCopago.setBounds(305, 116, 86, 20);
 		contentPane.add(textFieldCopago);
 		
-		lblCantMascotas = new JLabel("Mascotas:");
-		lblCantMascotas.setBounds(219, 133, 60, 14);
-		contentPane.add(lblCantMascotas);
-		
 		textFieldCantMascotas = new JTextField();
+		textFieldCantMascotas.setEditable(false);
 		textFieldCantMascotas.setColumns(10);
-		textFieldCantMascotas.setBounds(305, 130, 86, 20);
+		textFieldCantMascotas.setBounds(305, 144, 86, 20);
 		contentPane.add(textFieldCantMascotas);
 		
-		lblValor = new JLabel("Valor:");
-		lblValor.setBounds(219, 175, 60, 14);
-		contentPane.add(lblValor);
-		
 		textFieldValor = new JTextField();
+		textFieldValor.setEditable(false);
 		textFieldValor.setColumns(10);
 		textFieldValor.setBounds(305, 172, 86, 20);
 		contentPane.add(textFieldValor);
 		
-		lblAmbulancia = new JLabel("Ambulancia:");
-		lblAmbulancia.setBounds(219, 217, 60, 14);
-		contentPane.add(lblAmbulancia);
-		
 		textFieldAmbulancia = new JTextField();
+		textFieldAmbulancia.setEditable(false);
 		textFieldAmbulancia.setColumns(10);
-		textFieldAmbulancia.setBounds(305, 214, 86, 20);
+		textFieldAmbulancia.setBounds(305, 200, 86, 20);
 		contentPane.add(textFieldAmbulancia);
 		
-		lblAsistencia = new JLabel("Asistencia:");
-		lblAsistencia.setBounds(219, 256, 60, 14);
-		contentPane.add(lblAsistencia);
-		
 		textFieldAsistencia = new JTextField();
+		textFieldAsistencia.setEditable(false);
 		textFieldAsistencia.setColumns(10);
-		textFieldAsistencia.setBounds(305, 253, 86, 20);
+		textFieldAsistencia.setBounds(305, 228, 86, 20);
 		contentPane.add(textFieldAsistencia);
 		
-		lblConsultas = new JLabel("Consultas:");
-		lblConsultas.setBounds(219, 296, 60, 14);
-		contentPane.add(lblConsultas);
-		
 		textFieldConsulta = new JTextField();
+		textFieldConsulta.setEditable(false);
 		textFieldConsulta.setColumns(10);
-		textFieldConsulta.setBounds(305, 293, 86, 20);
+		textFieldConsulta.setBounds(305, 256, 86, 20);
 		contentPane.add(textFieldConsulta);
+		
+		JLabel lblPergamino = new JLabel(new ImageIcon(PERGAMINOREVISARPLAN));
+		lblPergamino.setBounds(158, 6, 280, 350);
+		contentPane.add(lblPergamino);
+	
+		
+		JLabel lblFondo = new JLabel(new ImageIcon(FONDO));
+		lblFondo.setBounds(0, 0, 604, 361);
+		contentPane.add(lblFondo);
+		
+		mostrarPlan();
 	}
 	
+	public void mostrarPlan() {
+		// TODO Auto-generated method stub
+		String msj= miSafePet.revisarPlan(id);
+		
+		
+		String[] datos = msj.split("\n");
+		String auxAmbulancia=datos[4];
+		String auxAsistencia=datos[5];
+		String auxConsulta=datos[6];
+					
+		textFieldCodigo.setText(datos[0]);
+		textFieldCopago.setText(datos[1]);
+		textFieldCantMascotas.setText(datos[2]);
+		textFieldValor.setText(datos[3]);
+		if(auxAmbulancia.equalsIgnoreCase("true")) {
+			textFieldAmbulancia.setText("Incluido");
+		}else {
+			textFieldAmbulancia.setText("No incluido");
+		}
+		
+		if(auxAsistencia.equalsIgnoreCase("true")) {
+			textFieldAsistencia.setText("Incluido");
+		}else {
+			textFieldAsistencia.setText("No incluido");
+		}
+		
+		if(auxConsulta.equalsIgnoreCase("true")) {
+			textFieldConsulta.setText("Incluido");
+		}else {
+			textFieldConsulta.setText("No incluido");
+		}
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		
-		
-		
+					
 		if (e.getSource() == btnAtras) {
 
 			miVentanaAfiliado.setVisible(true);
@@ -145,20 +178,6 @@ public class VentanaRevisarPlan extends JFrame implements ActionListener {
 			
 		}
 		
-		if (e.getSource() == btnVerPlan) {
-			String msj= miSafePet.revisarPlan(id);
-			
-				
-				String[] datos = msj.split("\n");
-							
-				textFieldCodigo.setText(datos[0]);
-				textFieldCopago.setText(datos[1]);
-				textFieldCantMascotas.setText(datos[2]);
-				textFieldValor.setText(datos[3]);
-				textFieldAmbulancia.setText(datos[4]);
-				textFieldAsistencia.setText(datos[5]);
-				textFieldConsulta.setText(datos[6]);
-			
-		}
+		
 	}
 }
