@@ -133,6 +133,18 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 
 		if(e.getSource() == btnConsultarCopago) {
 			
+			if(e.getSource() == btnConsultarCopago) {
+				int idC = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el Id del usuario al cual le desea Consultar Copago"));
+				Afiliado miAfiliadoC = miSafePet.buscarUsuario(idC);
+					if(miAfiliadoC != null) {
+						miSafePet.consultarCopago(idC);
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "No existe ningun afiliado con los datos ingresados", "Error",
+							JOptionPane.WARNING_MESSAGE);
+				}
+				
+			}
 		}
 		
 		if(e.getSource() == btnRegistrarCopago) {

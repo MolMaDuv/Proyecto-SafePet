@@ -1,6 +1,8 @@
 package mundo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
@@ -317,6 +319,33 @@ public class SafePet {
 			
 		}
 	return 	nombreAfiliado;
+	}
+	
+	public void consultarCopago(int id){
+		
+		Plan miPlan = null;
+		int miAfiliado;
+		System.out.println(id);
+		
+		for (int i = 0; i < misPlanes.size(); i++) {
+			
+			String mensaje = "---------------Informacion Copago  -------------------" + "\n";
+			miPlan = misPlanes.get(i);
+			miAfiliado = miPlan.getMiAfiliado().getId();
+			System.out.println(miAfiliado);
+			String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+			
+			
+			if (miAfiliado == id) {
+				JOptionPane.showMessageDialog(null, mensaje + "Fecha:" + timeStamp + "\n " +
+						"Afiliado: " + id + "\n" +
+						"Plan No: " + miPlan.getCodigo() + "\n" +
+						"Costo: " + miPlan.getCopago());
+			}
+			
+		}
+		
+
 	}
 	
 }
