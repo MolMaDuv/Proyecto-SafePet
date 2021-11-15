@@ -60,7 +60,7 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 
 	private JTextField JTextNombreMascota;
 	private JTextField JTextRaza;
-	private JTextField JTextPeso;
+	private JTextField JTextCodigo;
 	private JTextField JTextAltura;
 
 	JScrollPane panelTabla = new JScrollPane();
@@ -76,6 +76,8 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 	boolean doce = false;
 	private JTextField JTextEdad;
 	private JTextField JTextColor;
+	
+	String botones [] = {"Cuenta corriente", "Cuenta de ahorros", "Tarjeta credito", "Trajeta debito", "Oficina SfaePet"};
 
 	/**
 	 * Create the frame.
@@ -187,15 +189,15 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 		contentPane.add(JTextRaza);
 		JTextRaza.setColumns(10);
 
-		JLabel lblPesoMascota = new JLabel("Peso");
-		lblPesoMascota.setForeground(Color.WHITE);
-		lblPesoMascota.setBounds(131, 191, 60, 20);
-		contentPane.add(lblPesoMascota);
+		JLabel lblCodigoMascota = new JLabel("Codigo");
+		lblCodigoMascota.setForeground(Color.WHITE);
+		lblCodigoMascota.setBounds(131, 191, 60, 20);
+		contentPane.add(lblCodigoMascota);
 
-		JTextPeso = new JTextField();
-		JTextPeso.setBounds(201, 191, 86, 20);
-		contentPane.add(JTextPeso);
-		JTextPeso.setColumns(10);
+		JTextCodigo = new JTextField();
+		JTextCodigo.setBounds(201, 191, 86, 20);
+		contentPane.add(JTextCodigo);
+		JTextCodigo.setColumns(10);
 
 		JLabel lblAlturaMascota = new JLabel("Altura");
 		lblAlturaMascota.setForeground(Color.WHITE);
@@ -229,9 +231,9 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 
 		modelo = new DefaultTableModel();
 
+		modelo.addColumn("Codigo");
 		modelo.addColumn("Nombre");
 		modelo.addColumn("Raza");
-		modelo.addColumn("Peso");
 		modelo.addColumn("Altura");
 		modelo.addColumn("Edad");
 		modelo.addColumn("Color");
@@ -323,12 +325,12 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 
 			String nombre = JTextNombreMascota.getText();
 			String raza = JTextRaza.getText();
-			String peso = JTextPeso.getText();
+			String codigo = JTextCodigo.getText();
 			String altura = JTextAltura.getText();
 			String edad = JTextEdad.getText();
 			String color = JTextColor.getText();
 
-			if (nombre == "" || raza == "" || peso == "" || altura == "" || edad == "" || color == "") {
+			if (nombre == "" || raza == "" || codigo == "" || altura == "" || edad == "" || color == "") {
 				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados",
 						"Datos mascota incompletos", JOptionPane.WARNING_MESSAGE);
 			} else {
@@ -337,11 +339,11 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 				//boolean validacionPeso =  miSafePet.isInteger(peso);
 				
 				if(validacionEdad && validacionAltura) {
-					String beneficiario[] = { nombre, raza, peso, altura, edad, color };
+					String beneficiario[] = { codigo, nombre, raza, altura, edad, color };
 					modelo.addRow(beneficiario);
 
-					Beneficiario miBeneficiario = new Beneficiario(miAfiliado.getId(), Integer.parseInt(edad), nombre, raza,
-							Double.parseDouble(peso), Integer.parseInt(altura), color);
+					Beneficiario miBeneficiario = new Beneficiario(Integer.parseInt(edad), nombre, raza,
+							Integer.parseInt(codigo), Integer.parseInt(altura), color);
 					misBeneficiarios.add(miBeneficiario);
 
 					contadorMascotas++;
@@ -364,6 +366,7 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados", "Campos vacios",
 						JOptionPane.WARNING_MESSAGE);
 			} else {
+				int tiempo = 0;
 				if (jcbConsultasIlimitadas.isSelected()) {
 					consultas = true;
 				}
@@ -378,14 +381,17 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 
 				if (jrbTresMeses.isSelected()) {
 					tres = true;
+					tiempo = 3;
 				}
 
 				if (jrbSeisMeses.isSelected()) {
 					seis = true;
+					tiempo = 6;
 				}
 
 				if (jrbDoceMeses.isSelected()) {
 					doce = true;
+					tiempo = 12;
 				}
 
 				String respuestaSimulacion = miSafePet.calcularPlanSimulacion(contadorMascotas, consultas, ambulancia,
@@ -399,14 +405,37 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 							doce);
 
 					double copago = miSafePet.calcularCopago(valor);
+					
+					int x = JOptionPane.showOptionDialog(null, "Seleccione el metodo de pago", "Cargo Pago", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, botones, botones[0]);
+					String metodoPago = "";
 
+					if(x == 0) {
+						metodoPago = "Cuenta corriente";
+					}
+					
+					if(x == 1) {
+						metodoPago = "Cuenta de ahorros";
+					}
+					
+					if(x == 2) {
+						metodoPago = "Tarjeta credito";
+					}
+					
+					if(x == 3) {
+						metodoPago = "Trajeta debito";
+					}
+					
+					if(x == 4) {
+						metodoPago = "Oficina SafePet";
+					}
+					
 					Plan miPlan = new Plan(0, consultas, ambulancia, asistencia, valor, copago, miAfiliado,
-							misBeneficiarios);
+							misBeneficiarios, tiempo, metodoPago);
 					miSafePet.agregarPlan(miPlan);
 
 					JOptionPane.showMessageDialog(null, "Plan creado exitosamente", "Plan creado",
 							JOptionPane.WARNING_MESSAGE);
-
+					
 					miVentanaFuncionario.setVisible(true);
 					miVentanaFuncionario.setLocationRelativeTo(null);
 					setVisible(false);
@@ -430,7 +459,7 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 
 		JTextNombreMascota.setText("");
 		JTextRaza.setText("");
-		JTextPeso.setText("");
+		JTextCodigo.setText("");
 		JTextAltura.setText("");
 		JTextEdad.setText("");
 		JTextColor.setText("");

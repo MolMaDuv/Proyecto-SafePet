@@ -148,31 +148,37 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 							JOptionPane.WARNING_MESSAGE);
 				}
 
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(null, "Por favor ingresar un dato numerico", "Error",
 						JOptionPane.WARNING_MESSAGE);
 			}
 		}
 
 		if (e.getSource() == btnRegistrarCopago) {
-			
-			
+
 			String prestacion = JOptionPane.showInputDialog("Ingrese el codigo de prestacion");
-			
-			boolean validacionPrestacion =miSafePet.isInteger(prestacion);
-			
-			if(validacionPrestacion) {
+
+			boolean validacionPrestacion = miSafePet.isInteger(prestacion);
+
+			if (validacionPrestacion) {
 				Prestacion miPrestacion = miSafePet.buscarPrestacionD(Integer.parseInt(prestacion));
 				if (miPrestacion != null) {
-					String respuesta = miSafePet.registrarCopago(Integer.parseInt(prestacion));
-					JOptionPane.showConfirmDialog(this, respuesta + "\n\n¿Desea cancelar copago");
-					JOptionPane.showMessageDialog(null, "Copago Registrado");
+					int codPrestacion = Integer.parseInt(prestacion);
+					boolean estadoCopago = miSafePet.validarPagoCopago(codPrestacion);
+
+					if (estadoCopago == false) {
+						String respuesta = miSafePet.registrarCopago(Integer.parseInt(prestacion));
+						JOptionPane.showConfirmDialog(this, respuesta + "\n\n¿Desea cancelar copago");
+						JOptionPane.showMessageDialog(null, "Copago Registrado");
+					} else {
+						JOptionPane.showMessageDialog(null, "El copago del servicio ya fue cancelado", "Copago pagado",
+								JOptionPane.WARNING_MESSAGE);
+					}
 				}
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(null, "Por favor ingresar un dato numerico", "Error",
 						JOptionPane.WARNING_MESSAGE);
 			}
-			
 
 		}
 
@@ -191,15 +197,23 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 
 			boolean validacionIdConfeccionar = miSafePet.isInteger(idConfeccionar);
 			if (validacionIdConfeccionar) {
+
 				Afiliado miAfiliado = miSafePet.buscarUsuario(Integer.parseInt(idConfeccionar));
 
 				if (miAfiliado != null) {
 
-					VentanaConfeccionarPlan miVentanaConfeccionarPlan = new VentanaConfeccionarPlan(this, miSafePet,
-							miAfiliado, miEmpleado);
-					miVentanaConfeccionarPlan.setVisible(true);
-					miVentanaConfeccionarPlan.setLocationRelativeTo(null);
-					setVisible(false);
+					boolean bandera = miSafePet.validarExistenciaUsuarioEnPlan(idConfeccionar);
+
+					if (bandera == false) {
+						VentanaConfeccionarPlan miVentanaConfeccionarPlan = new VentanaConfeccionarPlan(this, miSafePet,
+								miAfiliado, miEmpleado);
+						miVentanaConfeccionarPlan.setVisible(true);
+						miVentanaConfeccionarPlan.setLocationRelativeTo(null);
+						setVisible(false);
+					} else {
+						JOptionPane.showMessageDialog(null, "El usuario ingresado ya cuenta con un plan", "Error",
+								JOptionPane.WARNING_MESSAGE);
+					}
 
 				} else {
 					JOptionPane.showMessageDialog(null, "No existe ningun afiliado con los datos ingresados", "Error",
@@ -221,8 +235,8 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 				if (miSafePet.buscarUsuario(Integer.parseInt(idModificar)) != null) {
 					boolean bandera = miSafePet.validarExistenciaUsuarioEnPlan(idModificar);
 					if (bandera) {
-						VentanaModificarPlan miVentanaModificarPlan = new VentanaModificarPlan(miVentanaLogin,
-								miEmpleado, miSafePet, idModificar);
+						VentanaModificarPlan miVentanaModificarPlan = new VentanaModificarPlan(this, miEmpleado,
+								miSafePet, idModificar);
 						miVentanaModificarPlan.setVisible(true);
 						miVentanaModificarPlan.setLocationRelativeTo(null);
 						setVisible(false);
@@ -249,10 +263,26 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 
 		if (e.getSource() == btnRegistrarAtencion) {
 
-			VentanaRegistrarAtencion miVentanaRegistrarAtencion = new VentanaRegistrarAtencion(this, miSafePet);
-			miVentanaRegistrarAtencion.setVisible(true);
-			miVentanaRegistrarAtencion.setLocationRelativeTo(null);
-			setVisible(false);
+			String idAfiliado = JOptionPane.showInputDialog(null, "Ingrese el ID del afiliado");
+
+			boolean validacionIdModificar = miSafePet.isInteger(idAfiliado);
+
+			if (validacionIdModificar) {
+				int id = Integer.parseInt(idAfiliado);
+				Afiliado miAfiliado = miSafePet.buscarUsuario(id);
+
+				if (miAfiliado != null) {
+					VentanaRegistrarAtencion miVentanaRegistrarAtencion = new VentanaRegistrarAtencion(this, miSafePet,
+							miAfiliado);
+					miVentanaRegistrarAtencion.setVisible(true);
+					miVentanaRegistrarAtencion.setLocationRelativeTo(null);
+					setVisible(false);
+				} else {
+					JOptionPane.showMessageDialog(null, "No existe ningun afiliado con los datos ingresados", "Error",
+							JOptionPane.WARNING_MESSAGE);
+				}
+
+			}
 
 		}
 

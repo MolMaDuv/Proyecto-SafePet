@@ -31,7 +31,7 @@ import mundo.SafePet;
 
 public class VentanaModificarPlan extends JFrame implements ActionListener {
 
-	private VentanaLogin miVentanaLogin;
+	private VentanaFuncionario miVentanaFuncionario;
 	private SafePet miSafePet;
 	private Empleado miEmpleado;
 	private ArrayList<Beneficiario> listaMascotasDeAfiliado = new ArrayList<Beneficiario>();
@@ -57,7 +57,7 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 
 	private JTextField JTextNombreMascota;
 	private JTextField JTextRaza;
-	private JTextField JTextPeso;
+	private JTextField JTextCodigo;
 	private JTextField JTextAltura;
 
 	JScrollPane panelTabla = new JScrollPane();
@@ -85,11 +85,11 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 	 * @param miAfiliado
 	 * @param miVentanaInicio
 	 */
-	public VentanaModificarPlan(VentanaLogin miVentanaLogin, Empleado miEmpleado, SafePet miSafePet,
+	public VentanaModificarPlan(VentanaFuncionario miVentanaFuncionario, Empleado miEmpleado, SafePet miSafePet,
 			String idAfiliado) {
 
 		this.miSafePet = miSafePet;
-		this.miVentanaLogin = miVentanaLogin;
+		this.miVentanaFuncionario = miVentanaFuncionario;
 		this.miEmpleado = miEmpleado;
 		idAfiliadoP = idAfiliado;
 
@@ -115,22 +115,6 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 		lblTextoSuperior.setForeground(Color.WHITE);
 		lblTextoSuperior.setBounds(10, 98, 584, 20);
 		contentPane.add(lblTextoSuperior);
-
-		// JLabel lblFuncionario = new JLabel("Funcionario " + miEmpleado.getNombre() +
-		// " - " + miEmpleado.getId());
-//		lblFuncionario.setForeground(Color.WHITE);
-//		lblFuncionario.setBounds(128, 11, 275, 20);
-//		contentPane.add(lblFuncionario);
-
-//		JLabel lblAfiliado = new JLabel("Afiliado "+miAfiliado.getNombre());
-//		lblAfiliado.setForeground(Color.WHITE);
-//		lblAfiliado.setBounds(128, 47, 170, 20);
-//		contentPane.add(lblAfiliado);
-
-//		JLabel lblId = new JLabel("Id "+miAfiliado.getId());
-//		lblId.setForeground(Color.WHITE);
-//		lblId.setBounds(308, 47, 110, 20);
-//		contentPane.add(lblId);
 
 		JLabel lblLogoEsquina1 = new JLabel(new ImageIcon(LOGOESQUINA));
 		lblLogoEsquina1.setBounds(25, 11, 80, 80);
@@ -179,15 +163,15 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 		contentPane.add(JTextRaza);
 		JTextRaza.setColumns(10);
 
-		JLabel lblPesoMascota = new JLabel("Peso");
-		lblPesoMascota.setForeground(Color.WHITE);
-		lblPesoMascota.setBounds(131, 191, 60, 20);
-		contentPane.add(lblPesoMascota);
+		JLabel lblCodigo = new JLabel("Codigo");
+		lblCodigo.setForeground(Color.WHITE);
+		lblCodigo.setBounds(131, 191, 60, 20);
+		contentPane.add(lblCodigo);
 
-		JTextPeso = new JTextField();
-		JTextPeso.setBounds(201, 191, 86, 20);
-		contentPane.add(JTextPeso);
-		JTextPeso.setColumns(10);
+		JTextCodigo = new JTextField();
+		JTextCodigo.setBounds(201, 191, 86, 20);
+		contentPane.add(JTextCodigo);
+		JTextCodigo.setColumns(10);
 
 		JLabel lblAlturaMascota = new JLabel("Altura");
 		lblAlturaMascota.setForeground(Color.WHITE);
@@ -253,7 +237,6 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == btnAtras) {
-			VentanaFuncionario miVentanaFuncionario = new VentanaFuncionario(miVentanaLogin, miSafePet, miEmpleado);
 
 			miVentanaFuncionario.setVisible(true);
 			miVentanaFuncionario.setLocationRelativeTo(null);
@@ -264,20 +247,20 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 
 			String nombre = JTextNombreMascota.getText();
 			String raza = JTextRaza.getText();
-			String peso = JTextPeso.getText();
+			String codigo = JTextCodigo.getText();
 			String altura = JTextAltura.getText();
 			String edad = JTextEdad.getText();
 			String color = JTextColor.getText();
 
-			if (nombre == "" || raza == "" || peso == "" || altura == "" || edad == "" || color == "") {
+			if (nombre == "" || raza == "" || codigo == "" || altura == "" || edad == "" || color == "") {
 				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados",
 						"Datos mascota incompletos", JOptionPane.WARNING_MESSAGE);
 			} else {
-				String beneficiario[] = { nombre, raza, peso, altura, edad, color };
+				String beneficiario[] = { codigo, nombre, raza, altura, edad, color };
 				modelo.addRow(beneficiario);
 
-				Beneficiario miBeneficiario = new Beneficiario(Integer.parseInt(idAfiliadoP), Integer.parseInt(edad),
-						nombre, raza, Double.parseDouble(peso), Integer.parseInt(altura), color);
+				Beneficiario miBeneficiario = new Beneficiario(Integer.parseInt(edad), nombre, raza,
+						Integer.parseInt(codigo), Integer.parseInt(altura), color);
 				listaMascotasDeAfiliado.add(miBeneficiario);
 				añadirBeneficiarioAlplan(miBeneficiario);
 
@@ -294,12 +277,12 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 		for (int i = 0; i < listaMascotasDeAfiliado.size(); i++) {
 			String nombre = listaMascotasDeAfiliado.get(i).getNombre();
 			String raza = listaMascotasDeAfiliado.get(i).getRaza();
-			String peso = String.valueOf(listaMascotasDeAfiliado.get(i).getPeso());
+			String codigo = String.valueOf(listaMascotasDeAfiliado.get(i).getCodigo());
 			String altura = String.valueOf(listaMascotasDeAfiliado.get(i).getAltura());
 			String edad = String.valueOf(listaMascotasDeAfiliado.get(i).getEdad());
 			String color = String.valueOf(listaMascotasDeAfiliado.get(i).getEdad());
 
-			String beneficiario[] = { nombre, raza, peso, altura, edad, color };
+			String beneficiario[] = { codigo, nombre, raza, altura, edad, color };
 			modelo.addRow(beneficiario);
 		}
 
@@ -313,7 +296,7 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 
 		JTextNombreMascota.setText("");
 		JTextRaza.setText("");
-		JTextPeso.setText("");
+		JTextCodigo.setText("");
 		JTextAltura.setText("");
 		JTextEdad.setText("");
 		JTextColor.setText("");

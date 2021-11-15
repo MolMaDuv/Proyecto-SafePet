@@ -5,8 +5,9 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.*;
-
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.Action;
@@ -46,17 +47,17 @@ public class VentanaRegistrarAtencion extends JFrame implements ActionListener {
 	private static final String LATERALDERECHO = "./img/LateralDerecho.png";
 	private static final String LATERALIZQUIERDO = "./img/LateralIzquierdo.png";
 
-	private SafePet misaSafePet;
 	private VentanaFuncionario miVentanaFuncionario;
+	private SafePet misaSafePet;
+	private Afiliado miAfiliado;
 	private JButton btnAtras;
 	private JLabel lblCodigoBeneficiario;
 	private final JTextField capturaBeneficiario = new JTextField();
 
-	public VentanaRegistrarAtencion(VentanaFuncionario miVentanaFuncionario, SafePet miSafePet)
-
-	{
+	public VentanaRegistrarAtencion(VentanaFuncionario miVentanaFuncionario, SafePet miSafePet, Afiliado miAfiliado) {
 		this.miVentanaFuncionario = miVentanaFuncionario;
 		this.miSafePet = miSafePet;
+		this.miAfiliado = miAfiliado;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 620, 400);
@@ -72,7 +73,7 @@ public class VentanaRegistrarAtencion extends JFrame implements ActionListener {
 		lblTitulo.setBounds(10, 11, 584, 20);
 		contentPane.add(lblTitulo);
 
-		JLabel lblTextoSuperior = new JLabel("PARA REALIZAR LA PRESTACION");
+		JLabel lblTextoSuperior = new JLabel("PARA REGISTRAR LA PRESTACION");
 		lblTextoSuperior.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTextoSuperior.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTextoSuperior.setForeground(Color.WHITE);
@@ -150,8 +151,9 @@ public class VentanaRegistrarAtencion extends JFrame implements ActionListener {
 		capturaAfiliado.setBounds(275, 64, 190, 20);
 		contentPane.add(capturaAfiliado);
 		capturaAfiliado.setColumns(10);
+		capturaAfiliado.setText(miAfiliado.getNombre());
 
-		lblCodigoAfiliado = new JLabel("Codigo del afiliado");
+		lblCodigoAfiliado = new JLabel("Afiliado");
 		lblCodigoAfiliado.setForeground(Color.WHITE);
 		lblCodigoAfiliado.setBounds(135, 67, 130, 14);
 		contentPane.add(lblCodigoAfiliado);
@@ -160,7 +162,7 @@ public class VentanaRegistrarAtencion extends JFrame implements ActionListener {
 		lblCodigoBeneficiario.setForeground(Color.WHITE);
 		lblCodigoBeneficiario.setBounds(135, 100, 130, 14);
 		contentPane.add(lblCodigoBeneficiario);
-		
+
 		capturaBeneficiario.setText("");
 		capturaBeneficiario.setBounds(275, 97, 190, 20);
 		contentPane.add(capturaBeneficiario);
@@ -169,46 +171,50 @@ public class VentanaRegistrarAtencion extends JFrame implements ActionListener {
 		JLabel lblFondo = new JLabel(new ImageIcon(FONDO));
 		lblFondo.setBounds(0, 0, 604, 361);
 		contentPane.add(lblFondo);
+
+		String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+		capturaFecha.setText(timeStamp);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == btnAgregar) {
-			
-			boolean validacionA = miSafePet.isInteger(capturaAfiliado.getText());
+
 			boolean validacionB = miSafePet.isInteger(capturaBeneficiario.getText());
-			
-			if(validacionA && validacionB) {
-				int codigoA = Integer.parseInt(capturaAfiliado.getText());
+
+			if (validacionB) {
+
+				int codigoA = miAfiliado.getId();
 				int codigoB = Integer.parseInt(capturaBeneficiario.getText());
 
-				String fecha = capturaFecha.getText();
-				String motivoString = capturaMotivo.getText();
-				String diagnotico = capturaDiagnostivo.getText();
-				String tratamiento = capturaTratamiento.getText();
+				boolean validarCodigoMascota = miSafePet.validarCodigoMascota(codigoA, codigoB);
 
-				Afiliado miAfiliado = miSafePet.buscarUsuario(codigoA);
-				if (miAfiliado != null) {
+				if (validarCodigoMascota) {
+					String fecha = capturaFecha.getText();
+					String motivoString = capturaMotivo.getText();
+					String diagnotico = capturaDiagnostivo.getText();
+					String tratamiento = capturaTratamiento.getText();
 
 					Prestacion miPrestacion = new Prestacion(0, codigoA, codigoB, fecha, motivoString, diagnotico,
 							tratamiento);
 
 					miSafePet.agregarRegistroAtencion(miPrestacion);
-					
-					
+
 					limpiarInterfaz();
-					}
-				}else {
-					JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"No hay mascotas registradas en su plan con el codigo ingresado", "Error",
+							JOptionPane.WARNING_MESSAGE);
 				}
+
 			} else {
 
 				JOptionPane.showMessageDialog(null,
 						"Por favor ingresar un dato numerico en los campos codigo afiliado y codigo beneficiario",
 						"Error", JOptionPane.WARNING_MESSAGE);
 			}
-			
 
+		}
 
 		if (e.getSource() == btnAtras) {
 			miVentanaFuncionario.setVisible(true);
@@ -216,18 +222,18 @@ public class VentanaRegistrarAtencion extends JFrame implements ActionListener {
 			setVisible(false);
 		}
 	}
-	
+
 	public void limpiarInterfaz() {
 		capturaAfiliado.setText("");
 
 		capturaBeneficiario.setText("");
-		
+
 		capturaFecha.setText("");
-		
+
 		capturaMotivo.setText("");
-		
+
 		capturaDiagnostivo.setText("");
-		
+
 		capturaTratamiento.setText("");
 	}
 }

@@ -11,9 +11,11 @@ public class Plan {
 	private double copago;
 	private Afiliado miAfiliado;
 	private ArrayList<Beneficiario> misBeneficiarios;
+	private int tiempo;
+	private String metodoPago;
 	
 	public Plan(int codigo, boolean consultas, boolean ambulancia, boolean asistenciaCasa, double valor, double copago,
-			Afiliado miAfiliado, ArrayList<Beneficiario> misBeneficiarios) {
+			Afiliado miAfiliado, ArrayList<Beneficiario> misBeneficiarios, int tiempo, String metodoPago) {
 		super();
 		this.codigo = codigo;
 		this.consultas = consultas;
@@ -23,6 +25,8 @@ public class Plan {
 		this.copago = copago;
 		this.miAfiliado = miAfiliado;
 		this.misBeneficiarios = misBeneficiarios;
+		this.tiempo = tiempo;
+		this.metodoPago = metodoPago;
 	}
 
 	public int getCodigo() {
@@ -88,5 +92,20 @@ public class Plan {
 	public void setMisBeneficiarios(ArrayList<Beneficiario> misBeneficiarios) {
 		this.misBeneficiarios = misBeneficiarios;
 	}
-	
+
+	public int getTiempo() {
+		return tiempo;
+	}
+
+	public void setTiempo(int tiempo) {
+		this.tiempo = tiempo;
+	}
+
+	public String getMetodoPago() {
+		return metodoPago;
+	}
+
+	public void setMetodoPago(String metodoPago) {
+		this.metodoPago = metodoPago;
+	}
 }
