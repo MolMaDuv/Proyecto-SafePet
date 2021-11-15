@@ -61,7 +61,7 @@ public class SafePet {
 		return validacion;
 	}
 
-	public String registrarCopago(int prestacion) {
+	public String mostrarCopago(int prestacion) {
 		Prestacion miPrestacion;
 		Plan miPlan;
 		String mensaje = "Informacion de Copago  \n\n";
@@ -82,6 +82,36 @@ public class SafePet {
 						mensaje += "Fecha:" + timeStamp + "\nCodigo Afiliado: " + miPrestacion.getCodigoAfiliado() + "\nCodigo atencion"
 								+ miPrestacion.getCodigoConsulta() + "\nValor a Pagar: " + miPlan.getValor();
 
+
+					}
+
+				}
+			}
+
+		}
+		return mensaje;
+	}
+	
+	
+	public String registrarCopago(int prestacion) {
+		Prestacion miPrestacion;
+		Plan miPlan;
+		String mensaje = "Informacion de Copago  \n\n";
+		String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+		int codigoArray = 0;
+
+		for (int i = 0; i < misPrestaciones.size(); i++) {
+
+			miPrestacion = misPrestaciones.get(i);
+			if (miPrestacion.getCodigoConsulta() == prestacion) {
+
+				int cedula = miPrestacion.getCodigoAfiliado();
+				for (int j = 0; j < misPlanes.size(); j++) {
+					miPlan = misPlanes.get(j);
+
+					if (misPlanes.get(j).getMiAfiliado().getId() == cedula) {
+
+
 						String copago = "Codigo Afiliado: " + miPrestacion.getCodigoAfiliado() + ""
 								+ miPrestacion.getCodigoConsulta() + "Valor a Pagar: " + miPlan.getValor();
 
@@ -99,6 +129,8 @@ public class SafePet {
 		}
 		return mensaje;
 	}
+	
+	
 
 	public String calcularPlanSimulacion(int contadorMascotas, boolean consultas, boolean ambulancia,
 			boolean asistencia, boolean tres, boolean seis, boolean doce) {
@@ -534,4 +566,39 @@ public class SafePet {
 		return validacion;
 	}
 
+	public boolean codigoValido( int codigoAfiliado, int codigoMascota) {
+	
+	boolean funcionarioEncontrado=true;
+	boolean existe = true;
+		
+		for (int i = 0; i < misPlanes.size() && funcionarioEncontrado; i++) {
+			Plan miPlan = misPlanes.get(i);
+			if(miPlan.getMiAfiliado().getId()==codigoAfiliado) {
+				funcionarioEncontrado=false;
+				
+				for (int j = 0; j < miPlan.getMisBeneficiarios().size() && existe; j++) {
+					Beneficiario miBeneficiario = miPlan.getMisBeneficiarios().get(j);
+	
+					if(miBeneficiario.getCodigo() == codigoMascota) {
+						existe = false;
+					}
+					
+				}
+			}
+		}
+		
+		return existe;		
+	}
+
+	public boolean codigoMascotaRepetido(ArrayList<Beneficiario> misBeneficiarios, int codigoMascota) {
+		boolean valido= true;
+		
+		for(int i=0; i<misBeneficiarios.size() && valido;i++){
+			if(misBeneficiarios.get(i).getCodigo()== codigoMascota){
+				valido=false;
+			}
+		}
+		return valido;
+	}
+	
 }

@@ -76,7 +76,7 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 	boolean doce = false;
 	private JTextField JTextEdad;
 	private JTextField JTextColor;
-	
+	private int idAfiliadoP;
 	String botones [] = {"Cuenta corriente", "Cuenta de ahorros", "Tarjeta credito", "Trajeta debito", "Oficina SafePet"};
 
 	/**
@@ -93,6 +93,8 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 		this.miSafePet = miSafePet;
 		this.miAfiliado = miAfiliado;
 		this.miEmpleado = miEmpleado;
+
+		idAfiliadoP = miAfiliado.getId();
 
 		setTitle("SafePet UQ");
 
@@ -336,20 +338,28 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 			} else {
 				boolean validacionEdad= miSafePet.isInteger(edad);
 				boolean validacionAltura= miSafePet.isInteger(altura);
-				//boolean validacionPeso =  miSafePet.isInteger(peso);
+				boolean validacionCodigo =  miSafePet.isInteger(codigo);
 				
-				if(validacionEdad && validacionAltura) {
-					String beneficiario[] = { codigo, nombre, raza, altura, edad, color };
-					modelo.addRow(beneficiario);
+				if(validacionEdad && validacionAltura && validacionCodigo) {
 
-					Beneficiario miBeneficiario = new Beneficiario(Integer.parseInt(edad), nombre, raza,
-							Integer.parseInt(codigo), Integer.parseInt(altura), color);
-					misBeneficiarios.add(miBeneficiario);
+					if(miSafePet.codigoMascotaRepetido(misBeneficiarios, Integer.parseInt(codigo))){
+						
+						String beneficiario[] = { codigo, nombre, raza, altura, edad, color };
+						modelo.addRow(beneficiario);
+	
+						Beneficiario miBeneficiario = new Beneficiario(Integer.parseInt(edad), nombre, raza,
+								Integer.parseInt(codigo), Integer.parseInt(altura), color);
+						misBeneficiarios.add(miBeneficiario);
+	
+						contadorMascotas++;
+						limpiarInterfaz();
+					}else{
+						JOptionPane.showMessageDialog(null, "Ingrese un codigo que no este repetido", "CODIGO REPETIDO", JOptionPane.WARNING_MESSAGE);
 
-					contadorMascotas++;
-					limpiarInterfaz();
+					}
+					
 				}else {
-					JOptionPane.showMessageDialog(null, "Por favor ingresar en los campos [edad, peso,altura] un dato numerico", "Error",
+					JOptionPane.showMessageDialog(null, "Por favor ingresar en los campos [edad, codigo,altura] un dato numerico", "Error",
 							JOptionPane.WARNING_MESSAGE);
 				}
 				

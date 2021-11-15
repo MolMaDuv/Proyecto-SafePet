@@ -140,23 +140,36 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == btnConsultarCopago) {
+			
+			String prestacion = JOptionPane.showInputDialog("Ingrese el codigo de prestacion");
 
-			String idC = JOptionPane.showInputDialog("Ingrese el Id del afiliado al cual le desea Consultar Copago");
-			boolean validacionidC = miSafePet.isInteger(idC);
+			boolean validacionPrestacion = miSafePet.isInteger(prestacion);
+			
+			if(prestacion!=null){
+				if(validacionPrestacion){
+					Prestacion miPrestacion = miSafePet.buscarPrestacionD(Integer.parseInt(prestacion));
+					if (miPrestacion != null) {
+						int codPrestacion = Integer.parseInt(prestacion);
+						boolean estadoCopago = miSafePet.validarPagoCopago(codPrestacion);
 
-			if (validacionidC) {
-				Afiliado miAfiliadoC = miSafePet.buscarUsuario(Integer.parseInt(idC));
-				if (miAfiliadoC != null) {
-					miSafePet.consultarCopago(Integer.parseInt(idC));
-
-				} else {
-					JOptionPane.showMessageDialog(null, "No existe ningun afiliado con los datos ingresados", "Error",
+						if (estadoCopago == false) {
+							String respuesta = miSafePet.mostrarCopago(Integer.parseInt(prestacion));
+							JOptionPane.showMessageDialog(null, respuesta);
+							
+						} else {
+							JOptionPane.showMessageDialog(null, "El copago del servicio ya fue cancelado", "Copago pagado",
+									JOptionPane.WARNING_MESSAGE);
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "No tiene copagos pendientes por pagar", "Error",
+								JOptionPane.WARNING_MESSAGE);
+					}
+					
+				} else {		
+					JOptionPane.showMessageDialog(null, "Por favor ingresar un dato numerico", "Error",
 							JOptionPane.WARNING_MESSAGE);
 				}
-
-			} else {
-				JOptionPane.showMessageDialog(null, "Por favor ingresar un dato numerico", "Error",
-						JOptionPane.WARNING_MESSAGE);
+				
 			}
 		}
 
@@ -165,29 +178,37 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 			String prestacion = JOptionPane.showInputDialog("Ingrese el codigo de prestacion");
 
 			boolean validacionPrestacion = miSafePet.isInteger(prestacion);
+			
+			if(prestacion!=null){
+				if(validacionPrestacion){
+					Prestacion miPrestacion = miSafePet.buscarPrestacionD(Integer.parseInt(prestacion));
+					if (miPrestacion != null) {
+						int codPrestacion = Integer.parseInt(prestacion);
+						boolean estadoCopago = miSafePet.validarPagoCopago(codPrestacion);
 
-			if (validacionPrestacion) {
-				Prestacion miPrestacion = miSafePet.buscarPrestacionD(Integer.parseInt(prestacion));
-				if (miPrestacion != null) {
-					int codPrestacion = Integer.parseInt(prestacion);
-					boolean estadoCopago = miSafePet.validarPagoCopago(codPrestacion);
-
-					if (estadoCopago == false) {
-						String respuesta = miSafePet.registrarCopago(Integer.parseInt(prestacion));
-						JOptionPane.showConfirmDialog(this, respuesta + "\n\n¿Desea cancelar copago");
-						JOptionPane.showMessageDialog(null, "Copago Registrado");
+						if (estadoCopago == false) {
+							String respuesta = miSafePet.mostrarCopago(Integer.parseInt(prestacion));
+							int opcion= JOptionPane.showConfirmDialog(this, respuesta + "\n\n¿Desea cancelar copago");
+							if(opcion==0){
+								miSafePet.registrarCopago(Integer.parseInt(prestacion));
+								JOptionPane.showMessageDialog(null, "Copago Registrado");
+							}
+						} else {
+							JOptionPane.showMessageDialog(null, "El copago del servicio ya fue cancelado", "Copago pagado",
+									JOptionPane.WARNING_MESSAGE);
+						}
 					} else {
-						JOptionPane.showMessageDialog(null, "El copago del servicio ya fue cancelado", "Copago pagado",
+						JOptionPane.showMessageDialog(null, "No tiene copagos pendientes por pagar", "Error",
 								JOptionPane.WARNING_MESSAGE);
 					}
-				} else {
-					JOptionPane.showMessageDialog(null, "No tiene copagos pendientes po pagar", "Error",
+					
+				} else {		
+					JOptionPane.showMessageDialog(null, "Por favor ingresar un dato numerico", "Error",
 							JOptionPane.WARNING_MESSAGE);
 				}
-			} else {
-				JOptionPane.showMessageDialog(null, "Por favor ingresar un dato numerico", "Error",
-						JOptionPane.WARNING_MESSAGE);
+				
 			}
+			
 
 		}
 
@@ -205,62 +226,67 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 					.showInputDialog("Ingrese el Id del usuario al cual le desea confeccionar el nuevo plan");
 
 			boolean validacionIdConfeccionar = miSafePet.isInteger(idConfeccionar);
-			if (validacionIdConfeccionar) {
+			if(idConfeccionar!=null){
+				if (validacionIdConfeccionar) {
 
-				Afiliado miAfiliado = miSafePet.buscarUsuario(Integer.parseInt(idConfeccionar));
+					Afiliado miAfiliado = miSafePet.buscarUsuario(Integer.parseInt(idConfeccionar));
 
-				if (miAfiliado != null) {
+					if (miAfiliado != null) {
 
-					boolean bandera = miSafePet.validarExistenciaUsuarioEnPlan(idConfeccionar);
+						boolean bandera = miSafePet.validarExistenciaUsuarioEnPlan(idConfeccionar);
 
-					if (bandera == false) {
-						VentanaConfeccionarPlan miVentanaConfeccionarPlan = new VentanaConfeccionarPlan(this, miSafePet,
-								miAfiliado, miEmpleado);
-						miVentanaConfeccionarPlan.setVisible(true);
-						miVentanaConfeccionarPlan.setLocationRelativeTo(null);
-						setVisible(false);
+						if (bandera == false) {
+							VentanaConfeccionarPlan miVentanaConfeccionarPlan = new VentanaConfeccionarPlan(this, miSafePet,
+									miAfiliado, miEmpleado);
+							miVentanaConfeccionarPlan.setVisible(true);
+							miVentanaConfeccionarPlan.setLocationRelativeTo(null);
+							setVisible(false);
+						} else {
+							JOptionPane.showMessageDialog(null, "El usuario ingresado ya cuenta con un plan", "Error",
+									JOptionPane.WARNING_MESSAGE);
+						}
+
 					} else {
-						JOptionPane.showMessageDialog(null, "El usuario ingresado ya cuenta con un plan", "Error",
+						JOptionPane.showMessageDialog(null, "No existe ningun afiliado con los datos ingresados", "Error",
 								JOptionPane.WARNING_MESSAGE);
 					}
-
 				} else {
-					JOptionPane.showMessageDialog(null, "No existe ningun afiliado con los datos ingresados", "Error",
+					JOptionPane.showMessageDialog(null, "Por favor ingresar un dato numerico", "Error",
 							JOptionPane.WARNING_MESSAGE);
-				}
-			} else {
-				JOptionPane.showMessageDialog(null, "Por favor ingresar un dato numerico", "Error",
-						JOptionPane.WARNING_MESSAGE);
+				}	
 			}
-
 		}
 
 		if (e.getSource() == btnModificarPlan) {
 			String idModificar = JOptionPane.showInputDialog(null, "Ingrese el ID del afiliado");
 
 			boolean validacionIdModificar = miSafePet.isInteger(idModificar);
-			if (validacionIdModificar) {
-
-				if (miSafePet.buscarUsuario(Integer.parseInt(idModificar)) != null) {
-					boolean bandera = miSafePet.validarExistenciaUsuarioEnPlan(idModificar);
-					if (bandera) {
-						VentanaModificarPlan miVentanaModificarPlan = new VentanaModificarPlan(this, miEmpleado,
-								miSafePet, idModificar);
-						miVentanaModificarPlan.setVisible(true);
-						miVentanaModificarPlan.setLocationRelativeTo(null);
-						setVisible(false);
+			
+			if(idModificar!=null){
+				if (validacionIdModificar) {
+					if (miSafePet.buscarUsuario(Integer.parseInt(idModificar)) != null) {
+						boolean bandera = miSafePet.validarExistenciaUsuarioEnPlan(idModificar);
+						if (bandera) {
+							VentanaModificarPlan miVentanaModificarPlan = new VentanaModificarPlan(this, miEmpleado,
+									miSafePet, idModificar);
+							miVentanaModificarPlan.setVisible(true);
+							miVentanaModificarPlan.setLocationRelativeTo(null);
+							setVisible(false);
+						} else {
+							JOptionPane.showMessageDialog(null, "El afiliado " + idModificar + " no tiene un plan ",
+									"Afiliado Sin Plan", JOptionPane.WARNING_MESSAGE);
+						}
 					} else {
-						JOptionPane.showMessageDialog(null, "El afiliado " + idModificar + " no tiene un plan ",
-								"Afiliado Sin Plan", JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No existe ningun afiliado con los datos ingresados", "Error",
+								JOptionPane.WARNING_MESSAGE);
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "No existe ningun afiliado con los datos ingresados", "Error",
+					JOptionPane.showMessageDialog(null, "Por favor ingresar un dato numerico", "Error",
 							JOptionPane.WARNING_MESSAGE);
 				}
-			} else {
-				JOptionPane.showMessageDialog(null, "Por favor ingresar un dato numerico", "Error",
-						JOptionPane.WARNING_MESSAGE);
+				
 			}
+		
 
 		}
 

@@ -109,7 +109,7 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 		lblTitulo.setBounds(10, 78, 584, 20);
 		contentPane.add(lblTitulo);
 
-		JLabel lblTextoSuperior = new JLabel("PARA CONFECCIONAR EL PLAN");
+		JLabel lblTextoSuperior = new JLabel("PARA MODIFICAR EL PLAN");
 		lblTextoSuperior.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTextoSuperior.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTextoSuperior.setForeground(Color.WHITE);
@@ -209,10 +209,10 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 		contentPane.add(btnAgregar);
 
 		modelo = new DefaultTableModel();
-
+		
+		modelo.addColumn("Codigo");
 		modelo.addColumn("Nombre");
 		modelo.addColumn("Raza");
-		modelo.addColumn("Peso");
 		modelo.addColumn("Altura");
 		modelo.addColumn("Edad");
 		modelo.addColumn("Color");
@@ -251,21 +251,41 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 			String altura = JTextAltura.getText();
 			String edad = JTextEdad.getText();
 			String color = JTextColor.getText();
+			
 
-			if (nombre == "" || raza == "" || codigo == "" || altura == "" || edad == "" || color == "") {
+			if (nombre.equalsIgnoreCase("") || raza.equalsIgnoreCase("") || codigo == "" || altura == "" || edad == "" || color.equalsIgnoreCase("")) {
 				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados",
 						"Datos mascota incompletos", JOptionPane.WARNING_MESSAGE);
 			} else {
-				String beneficiario[] = { codigo, nombre, raza, altura, edad, color };
-				modelo.addRow(beneficiario);
+				boolean edadEntera= miSafePet.isInteger(edad);
+				boolean codigoEntera= miSafePet.isInteger(codigo);
+				boolean alturaEntera= miSafePet.isInteger(altura);
 
-				Beneficiario miBeneficiario = new Beneficiario(Integer.parseInt(edad), nombre, raza,
-						Integer.parseInt(codigo), Integer.parseInt(altura), color);
-				listaMascotasDeAfiliado.add(miBeneficiario);
-				añadirBeneficiarioAlplan(miBeneficiario);
+				if(edadEntera && codigoEntera && alturaEntera){
 
-				contadorMascotas++;
-				limpiarInterfaz();
+					if(miSafePet.codigoValido(Integer.parseInt(idAfiliadoP), Integer.parseInt(codigo))){
+						String beneficiario[] = { codigo, nombre, raza, altura, edad, color };
+						modelo.addRow(beneficiario);
+						Beneficiario miBeneficiario = new Beneficiario(Integer.parseInt(edad), nombre, raza,
+								Integer.parseInt(codigo), Integer.parseInt(altura), color);
+						listaMascotasDeAfiliado.add(miBeneficiario);
+						añadirBeneficiarioAlplan(miBeneficiario);
+	
+						contadorMascotas++;	
+						limpiarInterfaz();
+						
+					}else{
+						JOptionPane.showMessageDialog(null, "Ingrese un codigo que no este repetido", "CODIGO REPETIDO", JOptionPane.WARNING_MESSAGE);
+
+					}
+	
+				}else{
+					JOptionPane.showMessageDialog(null, "Ingresar datos validos", "DATOS INCORRECTOS", JOptionPane.WARNING_MESSAGE);
+
+					
+				}
+				
+				
 			}
 		}
 
@@ -275,12 +295,12 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 		ArrayList<Beneficiario> listaMascotasDeAfiliado;
 		listaMascotasDeAfiliado = miSafePet.traerBeneficiarios(idAfiliado);
 		for (int i = 0; i < listaMascotasDeAfiliado.size(); i++) {
+			String codigo = String.valueOf(listaMascotasDeAfiliado.get(i).getCodigo());
 			String nombre = listaMascotasDeAfiliado.get(i).getNombre();
 			String raza = listaMascotasDeAfiliado.get(i).getRaza();
-			String codigo = String.valueOf(listaMascotasDeAfiliado.get(i).getCodigo());
 			String altura = String.valueOf(listaMascotasDeAfiliado.get(i).getAltura());
 			String edad = String.valueOf(listaMascotasDeAfiliado.get(i).getEdad());
-			String color = String.valueOf(listaMascotasDeAfiliado.get(i).getEdad());
+			String color = listaMascotasDeAfiliado.get(i).getColor();
 
 			String beneficiario[] = { codigo, nombre, raza, altura, edad, color };
 			modelo.addRow(beneficiario);
