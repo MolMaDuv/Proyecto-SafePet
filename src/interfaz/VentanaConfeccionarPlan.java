@@ -77,7 +77,7 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 	private JTextField JTextEdad;
 	private JTextField JTextColor;
 	
-	String botones [] = {"Cuenta corriente", "Cuenta de ahorros", "Tarjeta credito", "Trajeta debito", "Oficina SfaePet"};
+	String botones [] = {"Cuenta corriente", "Cuenta de ahorros", "Tarjeta credito", "Trajeta debito", "Oficina SafePet"};
 
 	/**
 	 * Create the frame.

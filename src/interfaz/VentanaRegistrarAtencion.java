@@ -55,6 +55,9 @@ public class VentanaRegistrarAtencion extends JFrame implements ActionListener {
 	private final JTextField capturaBeneficiario = new JTextField();
 
 	public VentanaRegistrarAtencion(VentanaFuncionario miVentanaFuncionario, SafePet miSafePet, Afiliado miAfiliado) {
+		
+		setTitle("SafePet UQ");
+		
 		this.miVentanaFuncionario = miVentanaFuncionario;
 		this.miSafePet = miSafePet;
 		this.miAfiliado = miAfiliado;

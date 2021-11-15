@@ -58,7 +58,7 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 
 	private JTextField JTextNombreMascota;
 	private JTextField JTextRaza;
-	private JTextField JTextPeso;
+	private JTextField JTextCodigo;
 	private JTextField JTextColor;
 
 	JScrollPane panelTabla = new JScrollPane();
@@ -210,15 +210,15 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 		contentPane.add(JTextRaza);
 		JTextRaza.setColumns(10);
 
-		JLabel lblPesoMascota = new JLabel("Peso");
-		lblPesoMascota.setForeground(Color.WHITE);
-		lblPesoMascota.setBounds(128, 244, 60, 20);
-		contentPane.add(lblPesoMascota);
+		JLabel lblCodigo = new JLabel("Codigo");
+		lblCodigo.setForeground(Color.WHITE);
+		lblCodigo.setBounds(128, 244, 60, 20);
+		contentPane.add(lblCodigo);
 
-		JTextPeso = new JTextField();
-		JTextPeso.setBounds(198, 244, 86, 20);
-		contentPane.add(JTextPeso);
-		JTextPeso.setColumns(10);
+		JTextCodigo = new JTextField();
+		JTextCodigo.setBounds(198, 244, 86, 20);
+		contentPane.add(JTextCodigo);
+		JTextCodigo.setColumns(10);
 
 		JLabel lblColorMascota = new JLabel("Color");
 		lblColorMascota.setForeground(Color.WHITE);
@@ -232,9 +232,9 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 
 		modelo = new DefaultTableModel();
 
+		modelo.addColumn("Codigo");
 		modelo.addColumn("Nombre");
 		modelo.addColumn("Raza");
-		modelo.addColumn("Peso");
 		modelo.addColumn("Color");
 
 		tabla = new JTable(modelo);
@@ -324,10 +324,10 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 
 			String nombre = JTextNombreMascota.getText();
 			String raza = JTextRaza.getText();
-			String peso = JTextPeso.getText();
+			String codigo = JTextCodigo.getText();
 			String color = JTextColor.getText();
 
-			String beneficiario[] = { nombre, raza, peso, color };
+			String beneficiario[] = { codigo, nombre, raza, color };
 			modelo.addRow(beneficiario);
 
 			contadorMascotas++;
@@ -384,7 +384,7 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 
 		JTextNombreMascota.setText("");
 		JTextRaza.setText("");
-		JTextPeso.setText("");
+		JTextCodigo.setText("");
 		JTextColor.setText("");
 	}
 }

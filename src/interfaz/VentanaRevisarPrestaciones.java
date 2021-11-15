@@ -44,6 +44,8 @@ public class VentanaRevisarPrestaciones extends JFrame implements ActionListener
 	private JButton btnAtras;
 
 	public VentanaRevisarPrestaciones(VentanaAfiliado miVentanaAfiliado, SafePet miSafePet, Afiliado miAfiliado) {
+		
+		setTitle("SafePet UQ");
 
 		this.miVentanaAfiliado = miVentanaAfiliado;
 		this.miSafePet = miSafePet;
@@ -66,7 +68,7 @@ public class VentanaRevisarPrestaciones extends JFrame implements ActionListener
 		modelo = new DefaultTableModel();
 
 		modelo.addColumn("codigo");
-		modelo.addColumn("fecha de consulta");
+		modelo.addColumn("F consulta");
 		modelo.addColumn("Motivo");
 		modelo.addColumn("Diagnostico");
 		modelo.addColumn("Tratamiento");
@@ -110,9 +112,7 @@ public class VentanaRevisarPrestaciones extends JFrame implements ActionListener
 
 	}
 
-	public void llenarTabla(ArrayList<Prestacion> misPrestaciones)
-
-	{
+	public void llenarTabla(ArrayList<Prestacion> misPrestaciones) {
 		if (misPrestaciones.size() != 0) {
 			for (int i = 0; i < misPrestaciones.size(); i++)
 

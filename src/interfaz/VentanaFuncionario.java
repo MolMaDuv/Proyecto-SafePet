@@ -35,6 +35,12 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 	private static final String LOGOESQUINA = "./img/LogoEsquina.png";
 	private static final String LATERALDERECHO = "./img/LateralDerecho.png";
 	private static final String LATERALIZQUIERDO = "./img/LateralIzquierdo.png";
+	private static final String BTNCONSULTARCOPAGO = "./img/ConsultarCopago.png";
+	private static final String BTNREGISTRARCOPAGO = "./img/RegistrarCopago.png";
+	private static final String BTNAGREGARUSUARIO = "./img/AgregarUsuario.png";
+	private static final String BTNCONFECCIONARPLAN = "./img/ConfeccionarPlan.png";
+	private static final String BTNMODIFICARPLAN = "./img/ModificarPlan.png";
+	private static final String BTNREGISTRARATENCION = "./img/RegistrarAtencion.png";
 
 	private JButton btnAtras;
 	private JButton btnConsultarCopago;
@@ -94,33 +100,33 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 		lblDatosFuncionario.setBounds(10, 51, 584, 30);
 		contentPane.add(lblDatosFuncionario);
 
-		btnConsultarCopago = new JButton("Consultar copago");
-		btnConsultarCopago.setBounds(151, 128, 140, 30);
+		btnConsultarCopago = new JButton(new ImageIcon(BTNCONSULTARCOPAGO));
+		btnConsultarCopago.setBounds(141, 128, 150, 30);
 		btnConsultarCopago.addActionListener(this);
 		contentPane.add(btnConsultarCopago);
 
-		btnRegistrarCopago = new JButton("Registrar copago");
-		btnRegistrarCopago.setBounds(319, 128, 140, 30);
+		btnRegistrarCopago = new JButton(new ImageIcon(BTNREGISTRARCOPAGO));
+		btnRegistrarCopago.setBounds(319, 128, 150, 30);
 		btnRegistrarCopago.addActionListener(this);
 		contentPane.add(btnRegistrarCopago);
 
-		btnAgregarUsuario = new JButton("Agregar usuario");
-		btnAgregarUsuario.setBounds(151, 188, 140, 30);
+		btnAgregarUsuario = new JButton(new ImageIcon(BTNAGREGARUSUARIO));
+		btnAgregarUsuario.setBounds(141, 188, 150, 30);
 		btnAgregarUsuario.addActionListener(this);
 		contentPane.add(btnAgregarUsuario);
 
-		btnConfeccionarPlan = new JButton("Confeccionar plan");
-		btnConfeccionarPlan.setBounds(319, 188, 140, 30);
+		btnConfeccionarPlan = new JButton(new ImageIcon(BTNCONFECCIONARPLAN));
+		btnConfeccionarPlan.setBounds(319, 188, 150, 30);
 		btnConfeccionarPlan.addActionListener(this);
 		contentPane.add(btnConfeccionarPlan);
 
-		btnModificarPlan = new JButton("Modificar plan");
-		btnModificarPlan.setBounds(151, 252, 140, 30);
+		btnModificarPlan = new JButton(new ImageIcon(BTNMODIFICARPLAN));
+		btnModificarPlan.setBounds(141, 252, 150, 30);
 		btnModificarPlan.addActionListener(this);
 		contentPane.add(btnModificarPlan);
 
-		btnRegistrarAtencion = new JButton("Registrar atencion");
-		btnRegistrarAtencion.setBounds(319, 252, 140, 30);
+		btnRegistrarAtencion = new JButton(new ImageIcon(BTNREGISTRARATENCION));
+		btnRegistrarAtencion.setBounds(319, 252, 150, 30);
 		btnRegistrarAtencion.addActionListener(this);
 		contentPane.add(btnRegistrarAtencion);
 
@@ -174,6 +180,9 @@ public class VentanaFuncionario extends JFrame implements ActionListener {
 						JOptionPane.showMessageDialog(null, "El copago del servicio ya fue cancelado", "Copago pagado",
 								JOptionPane.WARNING_MESSAGE);
 					}
+				} else {
+					JOptionPane.showMessageDialog(null, "No tiene copagos pendientes po pagar", "Error",
+							JOptionPane.WARNING_MESSAGE);
 				}
 			} else {
 				JOptionPane.showMessageDialog(null, "Por favor ingresar un dato numerico", "Error",

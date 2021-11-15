@@ -33,6 +33,7 @@ public class VentanaEvaluarServicio extends JFrame implements ActionListener {
 	private static final String LATERALDERECHO = "./img/LateralDerecho.png";
 	private static final String LATERALIZQUIERDO = "./img/LateralIzquierdo.png";
 	private static final String ESTRELLA = "./img/estrella.png";
+	private static final String BTNENVIARCALIFICACION = "./img/EnviarCalificacion.png";
 
 	private JButton btnAtras;
 	private JButton btnCalificar;
@@ -62,6 +63,13 @@ public class VentanaEvaluarServicio extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+		JLabel lblNewLabel = new JLabel("EVALUAR SERVICIO");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(120, 22, 400, 30);
+		contentPane.add(lblNewLabel);
+		
 		btnAtras = new JButton(new ImageIcon(BTNATRAS));
 		btnAtras.setBounds(10, 320, 110, 30);
 		btnAtras.addActionListener(this);
@@ -196,7 +204,7 @@ public class VentanaEvaluarServicio extends JFrame implements ActionListener {
 		contentPane.add(textObsevaciones);
 		textObsevaciones.setColumns(10);
 
-		btnCalificar = new JButton("ENVIAR CALIFICACION");
+		btnCalificar = new JButton(new ImageIcon(BTNENVIARCALIFICACION));
 		btnCalificar.setBounds(256, 295, 145, 30);
 		btnCalificar.addActionListener(this);
 		contentPane.add(btnCalificar);
