@@ -394,6 +394,7 @@ public Prestacion buscarPrestacionD(int id) {
 		
 		Plan miPlan = null;
 		int miAfiliado;
+		boolean bandera =true;
 		
 		for (int i = 0; i < misPlanes.size(); i++) {
 			
@@ -408,8 +409,14 @@ public Prestacion buscarPrestacionD(int id) {
 						"Afiliado: " + id + "\n" +
 						"Plan No: " + miPlan.getCodigo() + "\n" +
 						"Costo: " + miPlan.getCopago());
+				bandera =false;;
 			}
 			
+		}
+		
+		if(bandera) {
+			JOptionPane.showMessageDialog(null, "El afiliado no tiene ningun copago registrado", "Error",
+					JOptionPane.WARNING_MESSAGE);
 		}
 		
 
@@ -473,7 +480,14 @@ public Prestacion buscarPrestacionD(int id) {
 			}
 	}
 
-	
+	public boolean isInteger(String texto) {
+	    try {
+	        Integer.valueOf(texto);
+	        return true;
+	    } catch (NumberFormatException e) {
+	        return false;
+	    }
+	}
 	
 	
 	

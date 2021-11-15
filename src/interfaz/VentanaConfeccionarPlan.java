@@ -81,10 +81,11 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 	 * Create the frame.
 	 * 
 	 * @param miSafePet
-	 * @param miAfiliado 
+	 * @param miAfiliado
 	 * @param miVentanaInicio
 	 */
-	public VentanaConfeccionarPlan(VentanaFuncionario miVentanaFuncionario, SafePet miSafePet, Afiliado miAfiliado, Empleado miEmpleado) {
+	public VentanaConfeccionarPlan(VentanaFuncionario miVentanaFuncionario, SafePet miSafePet, Afiliado miAfiliado,
+			Empleado miEmpleado) {
 
 		this.miVentanaFuncionario = miVentanaFuncionario;
 		this.miSafePet = miSafePet;
@@ -113,18 +114,18 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 		lblTextoSuperior.setForeground(Color.WHITE);
 		lblTextoSuperior.setBounds(10, 98, 584, 20);
 		contentPane.add(lblTextoSuperior);
-		
+
 		JLabel lblFuncionario = new JLabel("Funcionario " + miEmpleado.getNombre() + " - " + miEmpleado.getId());
 		lblFuncionario.setForeground(Color.WHITE);
 		lblFuncionario.setBounds(128, 11, 275, 20);
 		contentPane.add(lblFuncionario);
-		
-		JLabel lblAfiliado = new JLabel("Afiliado "+miAfiliado.getNombre());
+
+		JLabel lblAfiliado = new JLabel("Afiliado " + miAfiliado.getNombre());
 		lblAfiliado.setForeground(Color.WHITE);
 		lblAfiliado.setBounds(128, 47, 170, 20);
 		contentPane.add(lblAfiliado);
-		
-		JLabel lblId = new JLabel("Id "+miAfiliado.getId());
+
+		JLabel lblId = new JLabel("Id " + miAfiliado.getId());
 		lblId.setForeground(Color.WHITE);
 		lblId.setBounds(308, 47, 110, 20);
 		contentPane.add(lblId);
@@ -154,12 +155,12 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 		btnRegistrar.setBounds(484, 520, 110, 30);
 		btnRegistrar.addActionListener(this);
 		contentPane.add(btnRegistrar);
-		
+
 		btnAgregar = new JButton(new ImageIcon(BTNAGREGAR));
 		btnAgregar.setBounds(252, 275, 110, 30);
 		btnAgregar.addActionListener(this);
 		contentPane.add(btnAgregar);
-		
+
 		JLabel lblDatosMascota = new JLabel("DATOS MASCOTA(S)");
 		lblDatosMascota.setForeground(Color.WHITE);
 		lblDatosMascota.setHorizontalAlignment(SwingConstants.CENTER);
@@ -205,28 +206,26 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 		JTextAltura.setBounds(367, 191, 86, 20);
 		contentPane.add(JTextAltura);
 		JTextAltura.setColumns(10);
-		
+
 		JLabel lblEdad = new JLabel("Edad");
 		lblEdad.setForeground(Color.WHITE);
 		lblEdad.setBounds(128, 222, 65, 20);
 		contentPane.add(lblEdad);
-		
+
 		JTextEdad = new JTextField();
 		JTextEdad.setBounds(201, 222, 86, 20);
 		contentPane.add(JTextEdad);
 		JTextEdad.setColumns(10);
-		
+
 		JLabel lblColor = new JLabel("Color");
 		lblColor.setForeground(Color.WHITE);
 		lblColor.setBounds(297, 222, 60, 20);
 		contentPane.add(lblColor);
-		
+
 		JTextColor = new JTextField();
 		JTextColor.setBounds(367, 222, 86, 20);
 		contentPane.add(JTextColor);
 		JTextColor.setColumns(10);
-
-		
 
 		modelo = new DefaultTableModel();
 
@@ -305,7 +304,7 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 		grupoTiempo.add(jrbTresMeses);
 		grupoTiempo.add(jrbSeisMeses);
 		grupoTiempo.add(jrbDoceMeses);
-		
+
 		JLabel lblFondo = new JLabel(new ImageIcon(FONDO));
 		lblFondo.setBounds(0, 0, 604, 561);
 		contentPane.add(lblFondo);
@@ -328,27 +327,39 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 			String altura = JTextAltura.getText();
 			String edad = JTextEdad.getText();
 			String color = JTextColor.getText();
-			
-			if(nombre == "" || raza == "" || peso == "" || altura == "" || edad == "" || color == "") {
-				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados", "Datos mascota incompletos",
-						JOptionPane.WARNING_MESSAGE);
+
+			if (nombre == "" || raza == "" || peso == "" || altura == "" || edad == "" || color == "") {
+				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados",
+						"Datos mascota incompletos", JOptionPane.WARNING_MESSAGE);
 			} else {
-				String beneficiario[] = { nombre, raza, peso, altura, edad, color };
-				modelo.addRow(beneficiario);
+				boolean validacionEdad= miSafePet.isInteger(edad);
+				boolean validacionAltura= miSafePet.isInteger(altura);
+				//boolean validacionPeso =  miSafePet.isInteger(peso);
 				
-				Beneficiario miBeneficiario = new Beneficiario(miAfiliado.getId(), Integer.parseInt(edad), nombre, raza, Double.parseDouble(peso), Integer.parseInt(altura), color);
-				misBeneficiarios.add(miBeneficiario);
+				if(validacionEdad && validacionAltura) {
+					String beneficiario[] = { nombre, raza, peso, altura, edad, color };
+					modelo.addRow(beneficiario);
+
+					Beneficiario miBeneficiario = new Beneficiario(miAfiliado.getId(), Integer.parseInt(edad), nombre, raza,
+							Double.parseDouble(peso), Integer.parseInt(altura), color);
+					misBeneficiarios.add(miBeneficiario);
+
+					contadorMascotas++;
+					limpiarInterfaz();
+				}else {
+					JOptionPane.showMessageDialog(null, "Por favor ingresar en los campos [edad, peso,altura] un dato numerico", "Error",
+							JOptionPane.WARNING_MESSAGE);
+				}
 				
-				contadorMascotas++;
-				limpiarInterfaz();
 			}
 		}
 
 		if (e.getSource() == btnRegistrar) {
 
-			if ((jcbConsultasIlimitadas.isSelected() == false && jcbAmbulancia.isSelected() == false && 
-					jcbAsistenciaCasa.isSelected() == false) || (jrbTresMeses.isSelected() == false && 
-					jrbSeisMeses.isSelected() == false && jrbDoceMeses.isSelected() == false)) {
+			if ((jcbConsultasIlimitadas.isSelected() == false && jcbAmbulancia.isSelected() == false
+					&& jcbAsistenciaCasa.isSelected() == false)
+					|| (jrbTresMeses.isSelected() == false && jrbSeisMeses.isSelected() == false
+							&& jrbDoceMeses.isSelected() == false)) {
 
 				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados", "Campos vacios",
 						JOptionPane.WARNING_MESSAGE);
@@ -379,31 +390,32 @@ public class VentanaConfeccionarPlan extends JFrame implements ActionListener {
 
 				String respuestaSimulacion = miSafePet.calcularPlanSimulacion(contadorMascotas, consultas, ambulancia,
 						asistencia, tres, seis, doce);
-				
-				
+
 				int i = JOptionPane.showConfirmDialog(this, respuestaSimulacion + "\n\n¿Desea continuar con el plan?");
-					
+
 				if (i == 0) {
-					
-					double valor = miSafePet.valorPlan(contadorMascotas, consultas, ambulancia, asistencia, tres, seis, doce);
-					
+
+					double valor = miSafePet.valorPlan(contadorMascotas, consultas, ambulancia, asistencia, tres, seis,
+							doce);
+
 					double copago = miSafePet.calcularCopago(valor);
-					
-					Plan miPlan = new Plan(0, consultas, ambulancia, asistencia, valor, copago, miAfiliado, misBeneficiarios);
+
+					Plan miPlan = new Plan(0, consultas, ambulancia, asistencia, valor, copago, miAfiliado,
+							misBeneficiarios);
 					miSafePet.agregarPlan(miPlan);
-					
+
 					JOptionPane.showMessageDialog(null, "Plan creado exitosamente", "Plan creado",
 							JOptionPane.WARNING_MESSAGE);
-					
+
 					miVentanaFuncionario.setVisible(true);
 					miVentanaFuncionario.setLocationRelativeTo(null);
 					setVisible(false);
 				}
-				
+
 				if (i == 1) {
 
-					JOptionPane.showMessageDialog(null, "Se procedera a cancelar la creacion del plan", "Plan cancelado",
-							JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Se procedera a cancelar la creacion del plan",
+							"Plan cancelado", JOptionPane.WARNING_MESSAGE);
 
 					miVentanaFuncionario.setVisible(true);
 					miVentanaFuncionario.setLocationRelativeTo(null);

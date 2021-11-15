@@ -63,7 +63,7 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 	JScrollPane panelTabla = new JScrollPane();
 	DefaultTableModel modelo;
 	JTable tabla;
-	
+
 	private int contadorMascotas;
 	boolean consultas = false;
 	boolean ambulancia = false;
@@ -74,21 +74,24 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 	private JTextField JTextEdad;
 	private JTextField JTextColor;
 	private String idAfiliadoP;
+
 	/**
 	 * Create the frame.
-	 * @param miEmpleado 
-	 * @param miVentanaLogin 
+	 * 
+	 * @param miEmpleado
+	 * @param miVentanaLogin
 	 * 
 	 * @param miSafePet
-	 * @param miAfiliado 
+	 * @param miAfiliado
 	 * @param miVentanaInicio
 	 */
-	public VentanaModificarPlan(VentanaLogin miVentanaLogin, Empleado miEmpleado, SafePet miSafePet,String idAfiliado) {
+	public VentanaModificarPlan(VentanaLogin miVentanaLogin, Empleado miEmpleado, SafePet miSafePet,
+			String idAfiliado) {
 
 		this.miSafePet = miSafePet;
 		this.miVentanaLogin = miVentanaLogin;
 		this.miEmpleado = miEmpleado;
-		idAfiliadoP= idAfiliado;
+		idAfiliadoP = idAfiliado;
 
 		setTitle("SafePet UQ");
 
@@ -112,17 +115,18 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 		lblTextoSuperior.setForeground(Color.WHITE);
 		lblTextoSuperior.setBounds(10, 98, 584, 20);
 		contentPane.add(lblTextoSuperior);
-		
-		//JLabel lblFuncionario = new JLabel("Funcionario " + miEmpleado.getNombre() + " - " + miEmpleado.getId());
+
+		// JLabel lblFuncionario = new JLabel("Funcionario " + miEmpleado.getNombre() +
+		// " - " + miEmpleado.getId());
 //		lblFuncionario.setForeground(Color.WHITE);
 //		lblFuncionario.setBounds(128, 11, 275, 20);
 //		contentPane.add(lblFuncionario);
-		
+
 //		JLabel lblAfiliado = new JLabel("Afiliado "+miAfiliado.getNombre());
 //		lblAfiliado.setForeground(Color.WHITE);
 //		lblAfiliado.setBounds(128, 47, 170, 20);
 //		contentPane.add(lblAfiliado);
-		
+
 //		JLabel lblId = new JLabel("Id "+miAfiliado.getId());
 //		lblId.setForeground(Color.WHITE);
 //		lblId.setBounds(308, 47, 110, 20);
@@ -194,22 +198,22 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 		JTextAltura.setBounds(367, 191, 86, 20);
 		contentPane.add(JTextAltura);
 		JTextAltura.setColumns(10);
-		
+
 		JLabel lblEdad = new JLabel("Edad");
 		lblEdad.setForeground(Color.WHITE);
 		lblEdad.setBounds(128, 222, 65, 20);
 		contentPane.add(lblEdad);
-		
+
 		JTextEdad = new JTextField();
 		JTextEdad.setBounds(201, 222, 86, 20);
 		contentPane.add(JTextEdad);
 		JTextEdad.setColumns(10);
-		
+
 		JLabel lblColor = new JLabel("Color");
 		lblColor.setForeground(Color.WHITE);
 		lblColor.setBounds(297, 222, 60, 20);
 		contentPane.add(lblColor);
-		
+
 		JTextColor = new JTextField();
 		JTextColor.setBounds(367, 222, 86, 20);
 		contentPane.add(JTextColor);
@@ -238,11 +242,10 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 		panelTabla.setBounds(100, 316, 405, 150);
 		contentPane.add(panelTabla);
 
-	
 		JLabel lblFondo = new JLabel(new ImageIcon(FONDO));
 		lblFondo.setBounds(0, 0, 604, 561);
 		contentPane.add(lblFondo);
-		//Aqui se llena la tabla 
+		// Aqui se llena la tabla
 		llenarTabla(idAfiliado);
 
 	}
@@ -250,7 +253,7 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == btnAtras) {
-			VentanaFuncionario miVentanaFuncionario= new VentanaFuncionario(miVentanaLogin, miSafePet, miEmpleado);
+			VentanaFuncionario miVentanaFuncionario = new VentanaFuncionario(miVentanaLogin, miSafePet, miEmpleado);
 
 			miVentanaFuncionario.setVisible(true);
 			miVentanaFuncionario.setLocationRelativeTo(null);
@@ -265,18 +268,19 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 			String altura = JTextAltura.getText();
 			String edad = JTextEdad.getText();
 			String color = JTextColor.getText();
-			
-			if(nombre == "" || raza == "" || peso == "" || altura == "" || edad == "" || color == "") {
-				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados", "Datos mascota incompletos",
-						JOptionPane.WARNING_MESSAGE);
+
+			if (nombre == "" || raza == "" || peso == "" || altura == "" || edad == "" || color == "") {
+				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados",
+						"Datos mascota incompletos", JOptionPane.WARNING_MESSAGE);
 			} else {
-				String beneficiario[] = { nombre, raza, peso, altura, edad, color};
+				String beneficiario[] = { nombre, raza, peso, altura, edad, color };
 				modelo.addRow(beneficiario);
-				
-				Beneficiario miBeneficiario = new Beneficiario(Integer.parseInt(idAfiliadoP), Integer.parseInt(edad), nombre, raza, Double.parseDouble(peso), Integer.parseInt(altura), color);
+
+				Beneficiario miBeneficiario = new Beneficiario(Integer.parseInt(idAfiliadoP), Integer.parseInt(edad),
+						nombre, raza, Double.parseDouble(peso), Integer.parseInt(altura), color);
 				listaMascotasDeAfiliado.add(miBeneficiario);
 				añadirBeneficiarioAlplan(miBeneficiario);
-				
+
 				contadorMascotas++;
 				limpiarInterfaz();
 			}
@@ -284,30 +288,27 @@ public class VentanaModificarPlan extends JFrame implements ActionListener {
 
 	}
 
-
-	
-	public void llenarTabla(String idAfiliado){
+	public void llenarTabla(String idAfiliado) {
 		ArrayList<Beneficiario> listaMascotasDeAfiliado;
-		listaMascotasDeAfiliado= miSafePet.traerBeneficiarios(idAfiliado);
-		for(int i=0; i<listaMascotasDeAfiliado.size();i++){
-			String nombre= listaMascotasDeAfiliado.get(i).getNombre();
-			String raza= listaMascotasDeAfiliado.get(i).getRaza();
+		listaMascotasDeAfiliado = miSafePet.traerBeneficiarios(idAfiliado);
+		for (int i = 0; i < listaMascotasDeAfiliado.size(); i++) {
+			String nombre = listaMascotasDeAfiliado.get(i).getNombre();
+			String raza = listaMascotasDeAfiliado.get(i).getRaza();
 			String peso = String.valueOf(listaMascotasDeAfiliado.get(i).getPeso());
 			String altura = String.valueOf(listaMascotasDeAfiliado.get(i).getAltura());
 			String edad = String.valueOf(listaMascotasDeAfiliado.get(i).getEdad());
 			String color = String.valueOf(listaMascotasDeAfiliado.get(i).getEdad());
 
-			String beneficiario[] = {nombre, raza,peso, altura, edad, color};
+			String beneficiario[] = { nombre, raza, peso, altura, edad, color };
 			modelo.addRow(beneficiario);
 		}
-		
+
 	}
-	
-	
+
 	private void añadirBeneficiarioAlplan(Beneficiario miBeneficiario) {
-		miSafePet.añadirBeneficiarioAlplan(idAfiliadoP,miBeneficiario);
+		miSafePet.añadirBeneficiarioAlplan(idAfiliadoP, miBeneficiario);
 	}
-	
+
 	public void limpiarInterfaz() {
 
 		JTextNombreMascota.setText("");

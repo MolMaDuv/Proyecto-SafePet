@@ -171,34 +171,49 @@ public class VentanaRegistrar extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 
+		
+
 		if (e.getSource() == btnAgregar) {
+			boolean validacionId = miSafePet.isInteger(JTextId.getText());
+			boolean validacionEdad = miSafePet.isInteger(JTextEdad.getText());
 
 			if (JTextId.getText().equals("") || JTextNombre.getText().equals("") || JTextTelefono.getText().equals("")
 					|| JTextDireccion.getText().equals("") || JTextCorreo.getText().equals("")
 					|| JTextEdad.getText().equals("")) {
 
-				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados", "Datos incompletos",
-						JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados",
+						"Datos incompletos", JOptionPane.WARNING_MESSAGE);
 
 			} else {
+				if (validacionId && validacionEdad) {
+					int id = Integer.parseInt(JTextId.getText());
+					String nombre = JTextNombre.getText();
+					String telefono = JTextTelefono.getText();
+					String direccion = JTextDireccion.getText();
+					String correo = JTextCorreo.getText();
+					int edad = Integer.parseInt(JTextEdad.getText());
 
-				int id = Integer.parseInt(JTextId.getText());
-				String nombre = JTextNombre.getText();
-				String telefono = JTextTelefono.getText();
-				String direccion = JTextDireccion.getText();
-				String correo = JTextCorreo.getText();
-				int edad = Integer.parseInt(JTextEdad.getText());
+					boolean validacioUsuario = miSafePet.validarExistenciaUsuario(id);
 
-				boolean validacioUsuario = miSafePet.validarExistenciaUsuario(id);
+					if (validacioUsuario == false) {
 
-				if (validacioUsuario == false) {
+						Afiliado miAfiliado = new Afiliado(id, nombre, telefono, direccion, correo, edad, 0);
+						miSafePet.agregarUsuario(miAfiliado);
+						JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente", "Registro exitoso",
+								JOptionPane.INFORMATION_MESSAGE);
+						limpiar();
+					}else {
+						JOptionPane.showMessageDialog(null, "El afiliado que intenta ingresar ya existe", "Error registro de afiliado",
+								JOptionPane.WARNING_MESSAGE);
+					}
 
-					Afiliado miAfiliado = new Afiliado(id, nombre, telefono, direccion, correo, edad, 0);
-					miSafePet.agregarUsuario(miAfiliado);
-					JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
-					limpiar();
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"En el campo de (Id) y (Edad), solamente ingresar valores numericos", "Error registro de afiliado",
+							JOptionPane.WARNING_MESSAGE);
 				}
 			}
+
 		}
 
 		if (e.getSource() == btnAtras) {

@@ -178,7 +178,7 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 		btnSimular.setBounds(484, 520, 110, 30);
 		btnSimular.addActionListener(this);
 		contentPane.add(btnSimular);
-		
+
 		btnAgregar = new JButton(new ImageIcon(BTNAGREGAR));
 		btnAgregar.setBounds(252, 275, 110, 30);
 		btnAgregar.addActionListener(this);
@@ -338,9 +338,10 @@ public class VentanaSimulacion extends JFrame implements ActionListener {
 
 			if (JTextId.getText() == "" || JTextNombre.getText() == "" || JTextCorreo.getText() == ""
 					|| JTextTelefono.getText() == "" || jcbConsultasIlimitadas.isSelected() == false
-					|| (jcbConsultasIlimitadas.isSelected() == false && jcbAmbulancia.isSelected() == false && 
-						jcbAsistenciaCasa.isSelected() == false) || (jrbTresMeses.isSelected() == false && 
-						jrbSeisMeses.isSelected() == false && jrbDoceMeses.isSelected() == false)) {
+					|| (jcbConsultasIlimitadas.isSelected() == false && jcbAmbulancia.isSelected() == false
+							&& jcbAsistenciaCasa.isSelected() == false)
+					|| (jrbTresMeses.isSelected() == false && jrbSeisMeses.isSelected() == false
+							&& jrbDoceMeses.isSelected() == false)) {
 
 				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos solicitados", "Campos vacios",
 						JOptionPane.WARNING_MESSAGE);

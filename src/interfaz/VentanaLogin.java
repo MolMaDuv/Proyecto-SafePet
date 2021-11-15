@@ -125,50 +125,59 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		if (e.getSource() == btnIngresar) {
 			
 			String tipoPersona = (String) comboBoxRol.getSelectedItem();
-			int id = Integer.parseInt(JTextContraseña.getText());
-			boolean validacion;
+			boolean validacionInteger =miSafePet.isInteger(JTextContraseña.getText());
 			
-			if(tipoPersona == "") {
+			if(!(tipoPersona.equalsIgnoreCase("")) ) {
+				if (validacionInteger) {
 				
-			}
-			
-			if(tipoPersona == "Funcionario") {
-				validacion = miSafePet.validarPersona(tipoPersona, id);
-				
-				if(validacion == true) {
+					int id = Integer.parseInt(JTextContraseña.getText());
+					boolean validacion;
+										
+					if(tipoPersona == "Funcionario") {
+						validacion = miSafePet.validarPersona(tipoPersona, id);
+						
+						if(validacion == true) {
+							
+							Empleado miEmpleado = miSafePet.buscarFuncionario(id);
+							
+							VentanaFuncionario miVentanaFuncionario = new VentanaFuncionario(this, miSafePet, miEmpleado);
+							miVentanaFuncionario.setVisible(true);
+							miVentanaFuncionario.setLocationRelativeTo(null);
+							setVisible(false);
+							
+						} else {
+							JOptionPane.showMessageDialog(null, "No existe ningun funcionario con los datos ingresados", "Error en login",
+									JOptionPane.WARNING_MESSAGE);
+						}
+					}
 					
-					Empleado miEmpleado = miSafePet.buscarFuncionario(id);
-					
-					VentanaFuncionario miVentanaFuncionario = new VentanaFuncionario(this, miSafePet, miEmpleado);
-					miVentanaFuncionario.setVisible(true);
-					miVentanaFuncionario.setLocationRelativeTo(null);
-					setVisible(false);
-					
-				} else {
-					JOptionPane.showMessageDialog(null, "No existe ningun funcionario con los datos ingresados", "Error en login",
+					if(tipoPersona == "Afiliado") {
+						validacion = miSafePet.validarPersona(tipoPersona, id);
+						Afiliado miAfiliado = miSafePet.buscarUsuario(id);
+						
+						if(validacion == true) {
+							
+							VentanaAfiliado miVentanaAfiliado = new VentanaAfiliado(this, miSafePet,miAfiliado);
+							miVentanaAfiliado.setVisible(true);
+							miVentanaAfiliado.setLocationRelativeTo(null);
+							setVisible(false);
+							
+						} else {
+							JOptionPane.showMessageDialog(null, "No existe ningun afiliado con los datos ingresados", "Error en login",
+									JOptionPane.WARNING_MESSAGE);
+						}
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "En el campo de Id, solamente ingresar valores numericos", "Error en login",
 							JOptionPane.WARNING_MESSAGE);
 				}
+				
+			}else {
+				JOptionPane.showMessageDialog(null, "Por favor seleccionar una opcion [Afiliado] o [Funcionario]", "Error en login",
+						JOptionPane.WARNING_MESSAGE);
+				
 			}
 			
-			if(tipoPersona == "Afiliado") {
-				validacion = miSafePet.validarPersona(tipoPersona, id);
-				Afiliado miAfiliado = miSafePet.buscarUsuario(id);
-				
-				if(validacion == true) {
-					
-					VentanaAfiliado miVentanaAfiliado = new VentanaAfiliado(this, miSafePet,miAfiliado);
-					miVentanaAfiliado.setVisible(true);
-					miVentanaAfiliado.setLocationRelativeTo(null);
-					setVisible(false);
-					
-				} else {
-					JOptionPane.showMessageDialog(null, "No existe ningun afiliado con los datos ingresados", "Error en login",
-							JOptionPane.WARNING_MESSAGE);
-				}
-			}
-		}else {
-			JOptionPane.showMessageDialog(null, "Seleccione por favor un Rol", "Error en login",
-					JOptionPane.WARNING_MESSAGE);
 		}
 
 		if (e.getSource() == btnAtras) {
